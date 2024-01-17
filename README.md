@@ -89,6 +89,26 @@ Ana Vulin E2 62/2023
     };
 ```
 
+### Loop sets
+
+  Sets which are repeated specified number of times that level maker describes. In example below, DSL code have repeat block which inticates that commands inside should be repeated 4 times.
+
+  ```
+    Start {
+        left right
+        left
+        repeat(4) {
+            up down
+            down
+            up down
+        }
+        up
+        down
+        up
+        left
+    };
+```
+
 ### Set definitions
 
   Level maker can trough DSL file define sets, similar to functions in general code, this can reduce repetitions, sets will hold some number of moves, and can be called in main Start set or other sets. Examples of sets in DSL can be shown here:
