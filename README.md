@@ -16,7 +16,9 @@ Ana Vulin E2 62/2023
 
   Game will firstly load files that contains DSL code and check if they are correctly written, then when user chooses the level, that is DSL written file, execution begins, which reads lines of DSL code and executes them.
 
-  Example of the game can be shown here
+  Example of the game can be shown here:
+  
+  [![Dance Dance revolution](https://img.youtube.com/vi/N8zdf8rbtEU/maxresdefault.jpg)](https://www.youtube.com/watch?v=N8zdf8rbtEU)
 
   ## DSL Specification
 
