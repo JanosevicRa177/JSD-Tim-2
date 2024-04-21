@@ -1,0 +1,52 @@
+
+    digraph textX {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+2591190722352[ label="{Program|songName: ID\lbpm: INT\ldifficulty: Difficulty\l}"]
+
+2591190718448[ label="{*Command|}"]
+
+2591190706736[ label="{MoveCommand|moves: list[Move]\l}"]
+
+2591190704784[ label="{*IfStatement|}"]
+
+2591190700880[ label="{IfPointsStatement|points: INT\lmovesWithBonus: INT\l}"]
+
+2591190711616[ label="{IfCompleteStatement|bonusMoves: INT\l}"]
+
+2591190728208[ label="{Loop|timesToRepeat: INT\l}"]
+
+2591190714544[ label="{Set|name: ID\l}"]
+
+
+
+2591190722352 -> 2591190714544[arrowtail=diamond, dir=both, headlabel="setDefinitions 0..*"]
+2591190722352 -> 2591190718448[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+2591190718448 -> 2591190706736 [dir=back]
+2591190718448 -> 2591190704784 [dir=back]
+2591190718448 -> 2591190728208 [dir=back]
+2591190704784 -> 2591190700880 [dir=back]
+2591190704784 -> 2591190711616 [dir=back]
+2591190711616 -> 2591190718448[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+2591190728208 -> 2591190718448[arrowtail=diamond, dir=both, headlabel="loopCommands 1..*"]
+2591190714544 -> 2591190718448[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+match_rules [ shape=plaintext, label=< <table>
+	<tr>
+		<td><b>Difficulty</b></td><td>EASY|MEDIUM|HARD</td>
+	</tr>
+	<tr>
+		<td><b>Move</b></td><td>Move</td>
+	</tr>
+</table> >]
+
+
+}

@@ -1,0 +1,53 @@
+Program:
+    'Name = ' songName=ID';'
+    'bpm = ' bpm=INT';'
+    'difficulty = ' difficulty=Difficulty';'
+    setDefinitions*=Set
+    'Start {'
+        commands+=Command
+    '};'
+;
+
+Difficulty:
+    "EASY"|"MEDIUM"|"HARD"
+;
+0
+//da li treba vise ili jedna loop, if i set?
+//kako referenca na set?
+Command:
+    MoveCommand|IfStatement|Loop
+;
+
+MoveCommand:
+    moves+=Move
+;
+
+IfStatement:
+    IfPointsStatement|IfCompleteStatement
+;
+
+Move:
+    ('left'? 'right'? 'up'? 'down'?)#';'
+;
+
+IfPointsStatement:
+    'if points(' points=INT ') bonus next ' movesWithBonus=INT';'
+;
+
+IfCompleteStatement:
+    'if complete {'
+        commands+=Command
+    '} bonus next ' bonusMoves=INT';'
+;
+
+Loop:
+    'repeat(' timesToRepeat=INT ') {'
+        loopCommands+=Command
+    '};'
+;
+
+Set:
+    'Set ' name=ID ' {'
+        commands+=Command
+    '};'
+;
