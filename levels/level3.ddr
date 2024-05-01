@@ -1,0 +1,18 @@
+Name = "any_song";
+bpm = 60;
+difficulty = EASY;
+
+Start {
+    right;
+    right;
+    repeat(4) {
+        up down;
+        down;
+        up down;
+    };
+    if points(400) bonus next 20;
+    up;
+    down;
+    up;
+    left;
+};

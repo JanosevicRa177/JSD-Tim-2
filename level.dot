@@ -1,0 +1,32 @@
+
+    digraph textX {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+2631048602832 -> 2631043033680 [label="commands:0" arrowtail=diamond dir=both]
+2631043033680[label="{:Command|}"]
+2631048602832 -> 2631048603280 [label="commands:1" arrowtail=diamond dir=both]
+2631048603280[label="{:Command|}"]
+2631048602832 -> 2631048603344 [label="commands:2" arrowtail=diamond dir=both]
+2631048603344[label="{:Command|}"]
+2631048602832 -> 2631048227664 [label="commands:3" arrowtail=diamond dir=both]
+2631048227664[label="{:Command|}"]
+2631048602832 -> 2631048603472 [label="commands:4" arrowtail=diamond dir=both]
+2631048603472[label="{:Command|}"]
+2631048602832 -> 2631048603792 [label="commands:5" arrowtail=diamond dir=both]
+2631048603792[label="{:Command|}"]
+2631048602832 -> 2631048603856 [label="commands:6" arrowtail=diamond dir=both]
+2631048603856[label="{:Command|}"]
+2631048602832 -> 2631048603920 [label="commands:7" arrowtail=diamond dir=both]
+2631048603920[label="{:Command|}"]
+2631048602832[label="{:Program|+songName:str='any_song'\l+bpm:int=60\l+difficulty:str='EASY'\lsetDefinitions:list=[]\l}"]
+
+}

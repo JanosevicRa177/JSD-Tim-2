@@ -1,5 +1,5 @@
 Program:
-    'Name = ' songName=ID';'
+    'Name = ''"'-songName=ID'"'-';'
     'bpm = ' bpm=INT';'
     'difficulty = ' difficulty=Difficulty';'
     setDefinitions*=Set
@@ -11,19 +11,13 @@ Program:
 Difficulty:
     "EASY"|"MEDIUM"|"HARD"
 ;
-0
-//da li treba vise ili jedna loop, if i set?
-//kako referenca na set?
-Command:
-    MoveCommand|IfStatement|Loop
-;
 
-MoveCommand:
-    moves+=Move
+Command:
+    IfStatement|Loop|Move|set=[Set]
 ;
 
 IfStatement:
-    IfPointsStatement|IfCompleteStatement
+    IfCompleteStatement|IfPointsStatement
 ;
 
 Move:
@@ -36,7 +30,7 @@ IfPointsStatement:
 
 IfCompleteStatement:
     'if complete {'
-        commands+=Command
+        ifCommands+=Command
     '} bonus next ' bonusMoves=INT';'
 ;
 
@@ -47,7 +41,7 @@ Loop:
 ;
 
 Set:
-    'Set ' name=ID ' {'
+    'Set' name=ID '{'
         commands+=Command
     '};'
 ;
