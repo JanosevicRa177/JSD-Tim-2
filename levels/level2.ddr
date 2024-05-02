@@ -1,0 +1,20 @@
+Name = "some_song";
+bpm = 60;
+difficulty = EASY;
+
+Start {
+    right;
+    right;
+    if complete {
+        up;
+        down;
+        up down;
+        up;
+        down;
+        up down;
+    } bonus next 20;
+    up;
+    down;
+    up;
+    left;
+};

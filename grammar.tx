@@ -1,0 +1,47 @@
+Program:
+    'Name = ''"'-songName=ID'"'-';'
+    'bpm = ' bpm=INT';'
+    'difficulty = ' difficulty=Difficulty';'
+    setDefinitions*=Set
+    'Start {'
+        commands+=Command
+    '};'
+;
+
+Difficulty:
+    "EASY"|"MEDIUM"|"HARD"
+;
+
+Command:
+    if=IfStatement|loop=Loop|move=Move|set=[Set]
+;
+
+IfStatement:
+    IfCompleteStatement|IfPointsStatement
+;
+
+Move:
+    ('left'? 'right'? 'up'? 'down'?)#';'
+;
+
+IfPointsStatement:
+    'if points(' points=INT ') bonus next ' movesWithBonus=INT';'
+;
+
+IfCompleteStatement:
+    'if complete {'
+        ifCommands+=Command
+    '} bonus next ' bonusMoves=INT';'
+;
+
+Loop:
+    'repeat(' timesToRepeat=INT ') {'
+        loopCommands+=Command
+    '};'
+;
+
+Set:
+    'Set' name=ID '{'
+        commands+=Command
+    '};'
+;
