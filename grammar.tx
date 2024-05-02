@@ -13,7 +13,7 @@ Difficulty:
 ;
 
 Command:
-    if=IfStatement|loop=Loop|Move|set=[Set]
+    if=IfStatement|loop=Loop|move=Move|set=[Set]
 ;
 
 IfStatement:

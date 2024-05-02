@@ -5,6 +5,6 @@ entity_mm = metamodel_from_file('grammar.tx')
 
 metamodel_export(entity_mm, 'grammar.dot')
 
-model = entity_mm.model_from_file("levels\level3.ddr")
+model = entity_mm.model_from_file("levels\level2.ddr")
 
 model_export(model, 'level.dot')
