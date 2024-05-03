@@ -1,8 +1,8 @@
+import time
+
 from textx.metamodel import metamodel_from_file
 
 from components.gui import TkinterGui
-from components.interface import Interface
-from game import Game
 from interpret_model import Level
 import os
 
@@ -30,6 +30,10 @@ def load_levels():
 
 
 if __name__ == "__main__":
+
     levels = load_levels()
-    gui: Interface = TkinterGui(levels)
-    # game = Game()
+    gui = TkinterGui(levels)
+    gui.initiate()
+
+
+    # game_logic = Game()

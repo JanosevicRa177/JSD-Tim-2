@@ -3,3 +3,4 @@ textX
 textX[cli]
 tk
 pillow
+keyboard

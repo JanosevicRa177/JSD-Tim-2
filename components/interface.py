@@ -6,6 +6,6 @@ class Interface(ABC):
         pass
 
     @abstractmethod
-    def initiate(self, levels) -> None:
+    def initiate(self) -> None:
         pass
 
