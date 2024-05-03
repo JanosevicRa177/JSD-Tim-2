@@ -25,55 +25,34 @@ class TkinterGui(Interface):
         self.level_sidebar.columnconfigure(0, weight=1)
 
         self.images_frame = tk.Frame(self.level_playground, bg='green')
-        self.images_frame.place(x=0, rely=0.2, relheight=0.4, relwidth=1)
+        self.images_frame.place(x=0, rely=0.1, relheight=0.4, relwidth=1)
 
         self.images_frame.rowconfigure(0, weight=1)
         self.images_frame.columnconfigure((0, 1, 2, 3), weight=1)
 
-        img_left = Image.open('imgs/arrow-left.jpg')
-        img_left = img_left.resize((200, 200))
-        arrow_left = ImageTk.PhotoImage(img_left)
-        canvas_left = tk.Canvas(self.images_frame, width=200, height=200, bg='lightblue')
-        canvas_left.grid(row=0, column=0)
-        canvas_left.create_image(0, 0, anchor=tk.NW, image=arrow_left)
-        self.canvas_left = canvas_left
-
-        img_right = Image.open('imgs/arrow-right.jpg')
-        img_right = img_right.resize((200, 200))
-        arrow_right = ImageTk.PhotoImage(img_right)
-        canvas_right = tk.Canvas(self.images_frame, width=200, height=200, bg='lightblue')
-        canvas_right.grid(row=0, column=1)
-        canvas_right.create_image(0, 0, anchor=tk.NW, image=arrow_right)
-        self.canvas_right = canvas_right
-
-        img_up = Image.open('imgs/arrow-up.jpg')
-        img_up = img_up.resize((200, 200))
-        arrow_up = ImageTk.PhotoImage(img_up)
-        canvas_up = tk.Canvas(self.images_frame, width=200, height=200, bg='lightblue')
-        canvas_up.grid(row=0, column=2)
-        canvas_up.create_image(0, 0, anchor=tk.NW, image=arrow_up)
+        img_up, arrow_up, canvas_up = self.create_arrow_image_object('imgs/arrow-up.jpg', 0, 0)
         self.canvas_up = canvas_up
 
-        img_down = Image.open('imgs/arrow-down.jpg')
-        img_down = img_down.resize((200, 200))
-        arrow_down = ImageTk.PhotoImage(img_down)
-        canvas_down = tk.Canvas(self.images_frame, width=200, height=200, bg='lightblue')
-        canvas_down.grid(row=0, column=3)
-        canvas_down.create_image(0, 0, anchor=tk.NW, image=arrow_down)
+        img_left, arrow_left, canvas_left = self.create_arrow_image_object('imgs/arrow-left.jpg', 0, 1)
+        self.canvas_left = canvas_left
+
+        img_right, arrow_right, canvas_right = self.create_arrow_image_object('imgs/arrow-right.jpg', 0, 2)
+        self.canvas_right = canvas_right
+
+        img_down, arrow_down, canvas_down = self.create_arrow_image_object('imgs/arrow-down.jpg', 0, 3)
         self.canvas_down = canvas_down
-        self.canvas_down.grid_forget()
+
         self.initiate(levels)
 
-
-    def create_arrow_image_object(self, img_path):
+    def create_arrow_image_object(self, img_path, row=0, column=0):
         img = Image.open(img_path)
         img = img.resize((200, 200))
-        img.show()
-        arrow_down = ImageTk.PhotoImage(img)
+        arrow = ImageTk.PhotoImage(img)
         canvas = tk.Canvas(self.images_frame, width=200, height=200, bg='lightblue')
-        canvas.pack()
-        canvas.create_image(0, 0, anchor=tk.NW, image=arrow_down)
-        return canvas
+        canvas.grid(row=row, column=column)
+        canvas.create_image(0, 0, anchor=tk.NW, image=arrow)
+        return img, arrow, canvas
+
     def initiate(self, levels):
         self.levels = levels
         self.draw()
