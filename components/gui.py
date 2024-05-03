@@ -74,6 +74,9 @@ class TkinterGui(Interface):
             ])
         )
 
+        if self.game and len(combination) > 0:
+            self.game.validate_action(combination)
+
         ## Call game logic for assessment
 
     def next_move(self, directions):
@@ -106,12 +109,6 @@ class TkinterGui(Interface):
 
     def start_level(self, level: Level) -> None:
         current_moves = [
-            Move(['left', 'right', 'up']),
-            Move(['left', 'right', 'down']),
-            Move(['left', 'up']),
-            StartBonusSequence(1.2),
-            Move(['left', 'right']),
-            EndBonusSequence(1.2),
             Move(['left']),
             Move(['right']),
             Move(['down']),

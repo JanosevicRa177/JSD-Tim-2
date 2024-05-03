@@ -4,6 +4,7 @@ import threading
 
 from collections import deque
 
+
 class Game:
     level: Level = None
     is_locked = False
@@ -11,8 +12,10 @@ class Game:
     current_moves: deque[Action] = deque()
     current_move = None
     score = 0
-    multiplier = 0
+    multiplier = 1
     timer = None
+
+    correct_action = 0
 
     def __init__(self, observer):
         self.observer = observer
@@ -27,7 +30,7 @@ class Game:
         if len(self.current_moves) == 0:
             self.should_stop = True
             return
-
+        self.update_parameters()
         self.current_move = self.current_moves.popleft()
         self.observer.process_action(self.current_move)
 
@@ -38,7 +41,7 @@ class Game:
         self.level = level
         self.current_moves = deque()
         self.score = 0
-        self.multiplier = 0
+        self.multiplier = 1
 
         if self.timer:
             self.timer.cancel()
@@ -48,9 +51,18 @@ class Game:
             self.current_moves.append(move)
         self.start()
 
-    def update_parameters(self, action):
-        self.multiplier *= action.get_multiplier()
-        self.score += action.get_score()
+    def validate_action(self, combination):
+        if self.current_move \
+                and set(combination) == set(self.current_move.get_combination()):
+            print('Action is correct', combination, self.current_move.get_combination())
+            self.correct_action = 1
+            return
+        print('Action is incorrect', self.current_move.get_combination())
+        self.correct_action = 0
+
+    def update_parameters(self):
+        if not self.current_move:
+            return
+        self.multiplier *= self.current_move.get_multiplier()
+        self.score += self.correct_action * self.multiplier
         print('New Score {}, New Multiplier {}'.format(self.score, self.multiplier))
-
-
