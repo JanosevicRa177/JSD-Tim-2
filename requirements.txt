@@ -1,3 +1,5 @@
 arpeggio
 textX
 textX[cli]
+tk
+pillow

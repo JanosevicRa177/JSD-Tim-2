@@ -6,6 +6,8 @@ class Level:
         self.count_moves = False
         self.number_if_complete_moves = 0
 
+    def get_speed(self):
+        return 5
     def interpret_level(self, model):
         if self.debug:
             print("level name: " + model.songName)

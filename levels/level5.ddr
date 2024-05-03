@@ -1,0 +1,57 @@
+Name = "ime_Pesme";
+bpm = 60;
+difficulty = EASY;
+
+Set entrance {
+    left right;
+    left;
+    right;
+    right;
+};
+
+Set Verse {
+    Verse_part;
+    up;
+    down;
+    up;
+    left;
+    Verse_part;
+    up;
+    down;
+    up;
+    left;
+};
+
+Set Verse_part {
+    left right;
+    left;
+    left right;
+    left;
+};
+
+Start {
+    entrance;
+    left right;
+    up down;
+    left;
+    right;
+    right;
+    Verse;
+    if complete {
+        up;
+        down;
+        up down;
+        up;
+        down;
+        up down;
+    } bonus next 20;
+    up;
+    down;
+    up;
+    left;
+    right;
+    right;
+    Verse;
+    left down;
+    right down;
+};

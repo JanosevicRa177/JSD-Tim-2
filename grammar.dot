@@ -11,32 +11,32 @@
     edge[dir=black,arrowtail=empty]
 
 
-3243129938720[ label="{Program|songName: ID\lbpm: INT\ldifficulty: Difficulty\l}"]
+1639337776112[ label="{Program|songName: ID\lbpm: INT\ldifficulty: Difficulty\l}"]
 
-3243129971904[ label="{Command|move: Move\l}"]
+1639337778992[ label="{Command|move: Move\l}"]
 
-3243129953360[ label="{*IfStatement|}"]
+1639337785712[ label="{*IfStatement|}"]
 
-3243129972880[ label="{IfPointsStatement|points: INT\lmovesWithBonus: INT\l}"]
+1639337773232[ label="{IfPointsStatement|points: INT\lmovesWithBonus: INT\l}"]
 
-3243129966048[ label="{IfCompleteStatement|movesWithBonus: INT\l}"]
+1639337774192[ label="{IfCompleteStatement|movesWithBonus: INT\l}"]
 
-3243129942624[ label="{Loop|timesToRepeat: INT\l}"]
+1639337801072[ label="{Loop|timesToRepeat: INT\l}"]
 
-3243129976784[ label="{Set|name: ID\l}"]
+1639337790512[ label="{Set|name: ID\l}"]
 
 
 
-3243129938720 -> 3243129976784[arrowtail=diamond, dir=both, headlabel="setDefinitions 0..*"]
-3243129938720 -> 3243129971904[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
-3243129971904 -> 3243129953360[arrowtail=diamond, dir=both, headlabel="if_ "]
-3243129971904 -> 3243129942624[arrowtail=diamond, dir=both, headlabel="loop "]
-3243129971904 -> 3243129976784[headlabel="set "]
-3243129953360 -> 3243129966048 [dir=back]
-3243129953360 -> 3243129972880 [dir=back]
-3243129966048 -> 3243129971904[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
-3243129942624 -> 3243129971904[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
-3243129976784 -> 3243129971904[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+1639337776112 -> 1639337790512[arrowtail=diamond, dir=both, headlabel="setDefinitions 0..*"]
+1639337776112 -> 1639337778992[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+1639337778992 -> 1639337785712[arrowtail=diamond, dir=both, headlabel="if_ "]
+1639337778992 -> 1639337801072[arrowtail=diamond, dir=both, headlabel="loop "]
+1639337778992 -> 1639337790512[headlabel="set "]
+1639337785712 -> 1639337774192 [dir=back]
+1639337785712 -> 1639337773232 [dir=back]
+1639337774192 -> 1639337778992[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+1639337801072 -> 1639337778992[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+1639337790512 -> 1639337778992[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
 match_rules [ shape=plaintext, label=< <table>
 	<tr>
 		<td><b>Difficulty</b></td><td>EASY|MEDIUM|HARD</td>
