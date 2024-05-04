@@ -13,7 +13,7 @@ Difficulty:
 ;
 
 Command:
-    if=IfStatement|loop=Loop|move=Move|set=[Set]
+    if_=IfStatement|loop=Loop|move=Move|set=[Set]
 ;
 
 IfStatement:
@@ -30,13 +30,13 @@ IfPointsStatement:
 
 IfCompleteStatement:
     'if complete {'
-        ifCommands+=Command
-    '} bonus next ' bonusMoves=INT';'
+        commands+=Command
+    '} bonus next ' movesWithBonus=INT';'
 ;
 
 Loop:
     'repeat(' timesToRepeat=INT ') {'
-        loopCommands+=Command
+        commands+=Command
     '};'
 ;
 
