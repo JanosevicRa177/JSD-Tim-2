@@ -1,6 +1,6 @@
 Name = "ime_Pesme";
 bpm = 60;
-difficulty = EASY;
+difficulty = EASY=1;
 
 Set entrance {
     left right;
@@ -36,6 +36,7 @@ Start {
     left;
     right;
     right;
+    pause(5);
     Verse;
     if complete {
         up;

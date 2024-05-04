@@ -1,10 +1,11 @@
 Name = "some_song";
 bpm = 60;
-difficulty = EASY;
+difficulty = EASY=1;
 
 Start {
     right;
-    right;
+    right; 
+    pause(1);
     if complete {
         up;
         down;
