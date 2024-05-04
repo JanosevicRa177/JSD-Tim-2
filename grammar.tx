@@ -1,15 +1,11 @@
 Program:
     'Name = ''"'-songName=ID'"'-';'
     'bpm = ' bpm=INT';'
-    'difficulty = ' difficulty=Difficulty';'
+    'difficulty = ' difficulty=ID '=' difficultyValue=FLOAT ';'
     setDefinitions*=Set
     'Start {'
         commands+=Command
     '};'
-;
-
-Difficulty:
-    "EASY"|"MEDIUM"|"HARD"
 ;
 
 Command:
