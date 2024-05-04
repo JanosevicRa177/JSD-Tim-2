@@ -11,36 +11,36 @@
     edge[dir=black,arrowtail=empty]
 
 
-2229208581216[ label="{Program|songName: ID\lbpm: INT\ldifficulty: Difficulty\l}"]
+2303833809680[ label="{Program|songName: ID\lbpm: INT\ldifficulty: ID\ldifficultyValue: FLOAT\l}"]
 
-2229208561696[ label="{Command|move: Move\l}"]
+2303833805712[ label="{Command|move: Move\l}"]
 
-2229208585120[ label="{*IfStatement|}"]
+2303833806704[ label="{*IfStatement|}"]
 
-2229208569504[ label="{IfPointsStatement|points: INT\lmovesWithBonus: INT\l}"]
+2303833785872[ label="{IfPointsStatement|points: INT\lmovesWithBonus: INT\l}"]
 
-2229208563648[ label="{IfCompleteStatement|bonusMoves: INT\l}"]
+2303833810672[ label="{IfCompleteStatement|bonusMoves: INT\l}"]
 
-2229208582192[ label="{Loop|timesToRepeat: INT\l}"]
+2303833812656[ label="{Loop|timesToRepeat: INT\l}"]
 
-2229208588048[ label="{Set|name: ID\l}"]
+2303833813648[ label="{Set|name: ID\l}"]
+
+2303833783888[ label="{PauseCommand|pauseValue: INT\l}"]
 
 
 
-2229208581216 -> 2229208588048[arrowtail=diamond, dir=both, headlabel="setDefinitions 0..*"]
-2229208581216 -> 2229208561696[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
-2229208561696 -> 2229208585120[arrowtail=diamond, dir=both, headlabel="if "]
-2229208561696 -> 2229208582192[arrowtail=diamond, dir=both, headlabel="loop "]
-2229208561696 -> 2229208588048[headlabel="set "]
-2229208585120 -> 2229208563648 [dir=back]
-2229208585120 -> 2229208569504 [dir=back]
-2229208563648 -> 2229208561696[arrowtail=diamond, dir=both, headlabel="ifCommands 1..*"]
-2229208582192 -> 2229208561696[arrowtail=diamond, dir=both, headlabel="loopCommands 1..*"]
-2229208588048 -> 2229208561696[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+2303833809680 -> 2303833813648[arrowtail=diamond, dir=both, headlabel="setDefinitions 0..*"]
+2303833809680 -> 2303833805712[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+2303833805712 -> 2303833806704[arrowtail=diamond, dir=both, headlabel="if "]
+2303833805712 -> 2303833812656[arrowtail=diamond, dir=both, headlabel="loop "]
+2303833805712 -> 2303833813648[headlabel="set "]
+2303833805712 -> 2303833783888[arrowtail=diamond, dir=both, headlabel="pause "]
+2303833806704 -> 2303833810672 [dir=back]
+2303833806704 -> 2303833785872 [dir=back]
+2303833810672 -> 2303833805712[arrowtail=diamond, dir=both, headlabel="ifCommands 1..*"]
+2303833812656 -> 2303833805712[arrowtail=diamond, dir=both, headlabel="loopCommands 1..*"]
+2303833813648 -> 2303833805712[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
 match_rules [ shape=plaintext, label=< <table>
-	<tr>
-		<td><b>Difficulty</b></td><td>EASY|MEDIUM|HARD</td>
-	</tr>
 	<tr>
 		<td><b>Move</b></td><td>UnorderedGroup(left?,right?,up?,down?) ;</td>
 	</tr>

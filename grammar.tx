@@ -43,5 +43,5 @@ Set:
 ;
 
 PauseCommand:
-    'pause(' pauseValue=INT ')'
+    'pause(' pauseValue=INT ');'
 ;

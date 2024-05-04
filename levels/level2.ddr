@@ -5,7 +5,6 @@ difficulty = EASY=1;
 Start {
     right;
     right; 
-    pause(1);
     if complete {
         up;
         down;

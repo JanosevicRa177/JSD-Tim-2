@@ -32,6 +32,7 @@ Set Verse_part {
 Start {
     entrance;
     left right;
+    pause(1);
     up down;
     left;
     right;
