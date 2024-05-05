@@ -24,12 +24,17 @@ Ana Vulin E2 62/2023
 
   ### Main program
 
-  Name of the level, bpm(Beats per minute or how fast level will play) and difficulty = name=value (the value is multiplied by the BPM to adjust the gameplay speed accordingly) should be required variables in every DSL file, after that comes part of the execution where level maker can specify moves that wants to be shown in single line of the game. Example of the simplest DSL file can be shown here:
+  Name of the level, bpm(Beats per minute or how fast level will play) and difficulties should be required variables in every DSL file, after that comes part of the execution where level maker can specify moves that wants to be shown in single line of the game. Example of the simplest DSL file can be shown here:
 
 ```
     Name = "Some song name";
     bpm = 60;
-    difficulty = EASY=1;
+    difficulties {
+        easy : 1;
+        normal : 1.1;
+        hard : 1.2;
+        extreme : 1.5;
+    }
     Start {
         left right;
         up down;

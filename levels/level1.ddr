@@ -1,6 +1,11 @@
 Name = "ime_Pesme";
 bpm = 60;
-difficulty = EASY=1;
+difficulties {
+    easy : 1;
+    normal : 1.1;
+    hard : 1.2;
+    extreme : 1.5;
+}
 
 Set entrance {
     left right;
