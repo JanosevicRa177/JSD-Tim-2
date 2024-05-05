@@ -1,7 +1,7 @@
 Program:
     'Name = ''"'-songName=ID'"'-';'
     'bpm = ' bpm=INT';'
-    'difficulty = ' difficulty=Difficulty';'
+    'difficulties {' difficulty+=Difficulty '}'
     setDefinitions*=Set
     'Start {'
         commands+=Command
@@ -9,11 +9,10 @@ Program:
 ;
 
 Difficulty:
-    "EASY"|"MEDIUM"|"HARD"
-;
+    difficultyName=ID ':' difficultyValue=FLOAT ';';
 
 Command:
-    if_=IfStatement|loop=Loop|move=Move|set=[Set]
+    if_=IfStatement|loop=Loop|move=Move|set=[Set]|pause=PauseCommand
 ;
 
 IfStatement:
@@ -44,4 +43,8 @@ Set:
     'Set' name=ID '{'
         commands+=Command
     '};'
+;
+
+PauseCommand:
+    'pause(' pauseValue=INT ');'
 ;

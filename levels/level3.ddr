@@ -1,6 +1,11 @@
 Name = "any_song";
 bpm = 60;
-difficulty = EASY;
+difficulties {
+    easy : 1;
+    normal : 1.1;
+    hard : 1.2;
+    extreme : 1.5;
+}
 
 Start {
     right;
