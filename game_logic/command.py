@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 
-class Action(ABC):
+class Command(ABC):
 
     @abstractmethod
     def get_combination(self) -> list[Any]:

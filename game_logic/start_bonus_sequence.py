@@ -1,10 +1,9 @@
 from typing import Any
 
-from game_logic.action import Action
+from game_logic.command import Command
 
 
-class StartBonusSequence(Action):
-
+class StartBonusSequence(Command):
     def __init__(self, multiplier):
         self.multiplier = multiplier
 

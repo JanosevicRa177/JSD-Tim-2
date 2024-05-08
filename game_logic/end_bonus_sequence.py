@@ -1,9 +1,9 @@
 from typing import Any
 
-from game_logic.action import Action
+from game_logic.command import Command
 
 
-class EndBonusSequence(Action):
+class EndBonusSequence(Command):
     def __init__(self, multiplier):
         self.multiplier = multiplier
     def get_combination(self) -> list[Any]:
