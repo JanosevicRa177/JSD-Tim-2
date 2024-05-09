@@ -3,7 +3,7 @@ import time
 from textx.metamodel import metamodel_from_file
 
 from components.gui import TkinterGui
-from interpret_model import Level
+from level import Level
 import os
 
 entity_mm = metamodel_from_file('grammar.tx')

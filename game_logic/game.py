@@ -1,7 +1,7 @@
 from game_logic.command import Command
 from game_logic.endmove import EndMove
 from game_logic.move import Move
-from interpret_model import Level
+from level import Level
 import threading
 
 from collections import deque

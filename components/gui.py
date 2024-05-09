@@ -7,7 +7,7 @@ from game_logic.game import Game
 from game_logic.move import Move
 from game_logic.start_bonus_sequence import StartBonusSequence
 from .interface import Interface
-from interpret_model import Level
+from level import Level
 import keyboard
 
 
