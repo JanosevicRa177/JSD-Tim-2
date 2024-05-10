@@ -11,7 +11,7 @@ Sara Sinjeri E2 66/2023
 Ana Vulin E2 62/2023
 
 ## Project theme
-  Project will implement DSL from domain of games, specifically dance dance revolution, music game in which user needs to input commands left, down, right and up at the time they are shown at the screen.
+  Project will implement DSL from domain of games, specifically dance dance revolution, music game in which user needs to input commands left, down, right and up at the time they are shown at the screen. Additionally, the DSL will support the possibility for a pause command to appear during gameplay.
   Code will be in programming language python using meta-language textX.
 
   Game will firstly load files that contains DSL code and check if they are correctly written, then when user chooses the level, that is DSL written file, execution begins, which reads lines of DSL code and executes them.
@@ -24,17 +24,23 @@ Ana Vulin E2 62/2023
 
   ### Main program
 
-  Name of the level, bpm(Beats per minute or how fast level will play) and difficulty should be required variables in every DSL file, after that comes part of the execution where level maker can specify moves that wants to be shown in single line of the game. Example of the simplest DSL file can be shown here:
+  Name of the level, bpm(Beats per minute or how fast level will play) and difficulties should be required variables in every DSL file, after that comes part of the execution where level maker can specify moves that wants to be shown in single line of the game. Example of the simplest DSL file can be shown here:
 
 ```
     Name = "Some song name";
     bpm = 60;
-    difficulty = EASY;
+    difficulties {
+        easy : 1;
+        normal : 1.1;
+        hard : 1.2;
+        extreme : 1.5;
+    }
     Start {
         left right;
         up down;
         left;
         right;
+        pause(5);
         right;
         up;
         down;
