@@ -1,10 +1,12 @@
 import string
 
 from game_logic.command import Command
+from game_logic.difficulty import Difficulty
 from game_logic.if_complete import IfComplete
 from game_logic.if_points import IfPoints
 from game_logic.loop import Loop
 from game_logic.move import Move
+from game_logic.pause import Pause
 from game_logic.set import Set
 
 
@@ -16,6 +18,7 @@ class Level:
         self.count_moves = False
         self.number_if_complete_moves = 0
         self.commands: list[Command] = []
+        self.difficulties: list[Difficulty] = []
 
     def get_speed(self):
         return 5
@@ -24,6 +27,9 @@ class Level:
         if self.debug:
             print("level name: " + model.songName)
             print("===========")
+        for difficulty in model.difficulty:
+            difficulty_command = Difficulty(difficulty.name, difficulty.value)
+            self.difficulties.append(difficulty_command)
         for command in model.commands:
             interpreted_command = self.interpret_command(command)
             self.commands.append(interpreted_command)
@@ -43,6 +49,12 @@ class Level:
             return self.interpret_loop(command.loop)
         elif command.set is not None:
             return self.interpret_set(command.set)
+        elif command.pause is not None:
+            return self.interpret_pause(command.pause)
+
+    def interpret_pause(self, pause):
+        pause_command = Pause(pause.value)
+        return pause_command
 
     def interpret_set(self, set):
         set_command = Set(set.name)

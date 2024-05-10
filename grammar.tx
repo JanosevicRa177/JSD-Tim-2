@@ -9,7 +9,7 @@ Program:
 ;
 
 Difficulty:
-    difficultyName=ID ':' difficultyValue=FLOAT ';';
+    name=ID ':' value=FLOAT ';';
 
 Command:
     if_=IfStatement|loop=Loop|move=Move|set=[Set]|pause=PauseCommand
@@ -46,5 +46,5 @@ Set:
 ;
 
 PauseCommand:
-    'pause(' pauseValue=INT ');'
+    'pause(' value=INT ');'
 ;
