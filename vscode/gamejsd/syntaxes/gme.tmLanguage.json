@@ -1,0 +1,29 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Game DSL",
+	"patterns": [
+		{
+		"name": "keyword.control.gme",
+		"match": "\\b(Name|bpm|difficulties|Start|Set|if|complete|points|bonus|next)\\b"
+		},
+		{
+			"name": "string.quoted.double",
+			"begin": "\"",
+			"end": "\""
+		},
+		{
+			"name": "constant.numeric",
+			"match": "\\b(\\d*\\.?\\d+)\\b",
+			"captures": {
+			  "1": {
+				"name": "constant.numeric.float"
+			  }
+			}
+		},
+		{
+			"name": "entity.name.function.gme",
+			"match": "\\b(left|right|up|down|pause)\\b"
+		}
+	],
+	"scopeName": "source.gme"
+}
