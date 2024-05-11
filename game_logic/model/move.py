@@ -17,9 +17,9 @@ class Move(Command):
         if "down" in move:
             self.combination.append("down")
 
-    def run_command(self):
+    def run_command(self) -> bool:
         game = Game(None)
-        game.do_move(self)
+        return game.do_move(self)
 
     def is_regular_move(self) -> bool:
         return True

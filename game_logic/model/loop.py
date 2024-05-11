@@ -8,8 +8,9 @@ class Loop(Command):
         self.commands: list[Command] = []
 
     def run_command(self):
-        for command in self.commands:
-            command.run_command()
+        for _ in range(self.times_to_repeat):
+            for command in self.commands:
+                command.run_command()
 
     def is_regular_move(self) -> bool:
         return False

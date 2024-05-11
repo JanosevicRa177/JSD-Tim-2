@@ -18,7 +18,7 @@ def interpret_command(command) -> Command:
     elif command.loop is not None:
         return interpret_loop(command.loop)
     elif command.set is not None:
-        return Set(command.set.name)
+        return interpret_set(command.set)
     elif command.pause is not None:
         return Pause(command.pause.value)
 

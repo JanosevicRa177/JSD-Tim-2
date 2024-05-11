@@ -4,7 +4,6 @@ from game_logic.model.bonus.base_bonus import BaseBonus
 from game_logic.model.bonus.default_bonus import DefaultBonus
 
 import copy
-import threading
 
 
 class Game:
@@ -15,17 +14,15 @@ class Game:
     score = 0
     bonus: BaseBonus | None = None
     current_move = None
-    correct_action: int | None = None
+    correct_action: bool | None = None
 
-    def __new__(cls, gui):
+    def __new__(cls, gui=None):
         if cls.instance is None:
             cls.instance = super(Game, cls).__new__(cls)
             cls.instance.gui = gui
         return cls.instance
 
     def start(self, level):
-        print(level.bpm)
-        print(level.songName)
         self.bpm_speed = 60 / level.bpm
 
         for command in level.commands:
@@ -35,10 +32,11 @@ class Game:
         return
 
     def do_move(self, move):
-        self.gui.next_move(move.combination)
         self.current_move = move
         self.correct_action = None
+        self.gui.next_move(move.combination)
         time.sleep(self.bpm_speed)
+        return self.correct_action
 
     def restart(self, level):
         self.score = 0
