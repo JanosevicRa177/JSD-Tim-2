@@ -1,13 +1,11 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-from game_logic.command import Command
-from game_logic.end_bonus_sequence import EndBonusSequence
+from game_logic.model.command import Command
 from game_logic.game import Game
-from game_logic.move import Move
-from game_logic.start_bonus_sequence import StartBonusSequence
+from game_logic.model.move import Move
 from .interface import Interface
-from level import Level
+from game_logic.model.level import Level
 import keyboard
 
 
@@ -40,7 +38,11 @@ class TkinterGui(Interface):
         self.images_frame.place(x=0, rely=0.1, relheight=0.4, relwidth=1)
 
         self.images_frame.rowconfigure(0, weight=1)
-        self.images_frame.columnconfigure((0, 1, 2, 3), weight=1)
+
+        self.images_frame.columnconfigure(0, weight=1)
+        self.images_frame.columnconfigure(1, weight=1)
+        self.images_frame.columnconfigure(2, weight=1)
+        self.images_frame.columnconfigure(3, weight=1)
 
         img_up, arrow_up, canvas_up = self.create_arrow_image_object('imgs/arrow-up.jpg', 0, 0)
         self.canvas_up = canvas_up
@@ -79,7 +81,7 @@ class TkinterGui(Interface):
         combination.extend(['right'] if keyboard.is_pressed('right') else [])
 
         if self.game and len(combination) > 0:
-            self.game.validate_action(combination)
+            self.game.validate_move(combination)
 
     def next_move(self, directions):
         self.toggle_canvas('up', directions, 0, 0)
@@ -105,33 +107,13 @@ class TkinterGui(Interface):
         for idx, level in enumerate(self.levels):
             k = idx + 1
             btn = tk.Button(self.level_sidebar, height=2,
-                            bg="blue", fg="white", font=10, text=str(k),
-                            command=lambda lvl=level, lvl_ind=k: self.start_level(lvl))
+                            bg="blue", fg="white", font=10, text=str(k) + " " + level.songName,
+                            command=lambda lvl=level, lvl_ind=k: self.start_level(level))
             btn.grid(row=idx, column=0, sticky='nsew')
 
     def start_level(self, level: Level) -> None:
-        current_moves = [
-            Move(['left', 'right', 'down']),
-            Move(['right']),
-            Move(['down']),
-            Move(['up']),
-            StartBonusSequence(1.4),
-            Move(['left']),
-            Move(['right']),
-            Move(['down']),
-            Move(['up']),
-            EndBonusSequence(1.4)
-
-        ]
-        print('Starting level again')
         self.score_label.config(text="Your score is 0")
-        self.level = level
-        self.game.restart(level, current_moves)
-
-    def process_action(self, action: Command):
-        if action.is_regular_move():
-            self.next_move(action.get_combination())
-            return
+        self.game.restart(level)
 
     def update_score(self, score):
         self.score_label.config(text="Your score is {}".format(score))

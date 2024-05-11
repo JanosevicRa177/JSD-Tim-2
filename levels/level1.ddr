@@ -1,5 +1,5 @@
 Name = "ime_Pesme";
-bpm = 60;
+bpm = 90;
 difficulties {
     easy : 1;
     normal : 1.1;

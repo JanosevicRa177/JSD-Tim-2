@@ -1,15 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Any
 
 
 class Command(ABC):
 
     @abstractmethod
-    def get_combination(self) -> list[Any]:
-        pass
-
-    @abstractmethod
-    def get_multiplier(self) -> float:
+    def run_command(self) -> bool:
         pass
 
     @abstractmethod
