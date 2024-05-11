@@ -108,7 +108,7 @@ class TkinterGui(Interface):
             k = idx + 1
             btn = tk.Button(self.level_sidebar, height=2,
                             bg="blue", fg="white", font=10, text=str(k) + " " + level.songName,
-                            command=lambda lvl=level, lvl_ind=k: self.start_level(level))
+                            command=lambda lvl=level, lvl_ind=k: self.start_level(lvl))
             btn.grid(row=idx, column=0, sticky='nsew')
 
     def start_level(self, level: Level) -> None:
