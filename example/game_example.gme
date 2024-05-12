@@ -5,7 +5,7 @@ difficulties {
     normal : 1.1;
     hard : 1.2;
     extreme : 1.5;
-}
+};
 
 Set entrance {
     left right;
@@ -39,6 +39,11 @@ Start {
     left right;
     pause(1);
     up down;
+    repeat(4) {
+        up down;
+        down;
+        up down;
+    };
     left;
     right;
     right;

@@ -1,7 +1,7 @@
 Program:
     'Name = ''"'-songName=ID'"'-';'
     'bpm = ' bpm=INT';'
-    'difficulties {' difficulty+=Difficulty '}'
+    'difficulties {' difficulty+=Difficulty '};'
     setDefinitions*=Set
     'Start {'
         commands+=Command

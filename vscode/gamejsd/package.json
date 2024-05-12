@@ -20,6 +20,12 @@
       "language": "gme",
       "scopeName": "source.gme",
       "path": "./syntaxes/gme.tmLanguage.json"
-    }]
+    }],
+    "snippets": [
+      {
+        "language": "gme",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
   }
 }

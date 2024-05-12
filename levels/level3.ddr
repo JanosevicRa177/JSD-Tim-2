@@ -5,7 +5,7 @@ difficulties {
     normal : 1.1;
     hard : 1.2;
     extreme : 1.5;
-}
+};
 
 Start {
     right;
