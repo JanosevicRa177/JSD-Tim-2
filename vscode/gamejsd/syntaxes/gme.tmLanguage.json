@@ -4,7 +4,7 @@
 	"patterns": [
 		{
 		"name": "keyword.control.gme",
-		"match": "\\b(Name|bpm|difficulties|Start|Set|if|complete|points|bonus|next)\\b"
+		"match": "\\b(Name|bpm|difficulties|Start|Set|if|complete|points|bonus|next|repeat)\\b"
 		},
 		{
 			"name": "string.quoted.double",
@@ -23,7 +23,11 @@
 		{
 			"name": "entity.name.function.gme",
 			"match": "\\b(left|right|up|down|pause)\\b"
-		}
+		},
+		{
+			"name": "entity.name.function",
+			"match": "\\b\\w+\\b"
+	    }
 	],
 	"scopeName": "source.gme"
 }
