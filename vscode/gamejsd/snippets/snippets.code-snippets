@@ -1,0 +1,17 @@
+{
+    "GameSnippet": {
+        "prefix": "gme",
+        "body": [
+            "Name = \"${1:ime_pesme}\";",
+            "bpm = ${2:60};",
+            "difficulties { ",
+
+            "};",
+            "Start {",
+
+            "};"
+            
+        ],
+        "description": "Creates a basic structure of the game"
+    }
+}
