@@ -1,5 +1,5 @@
 Name = "any_song";
-bpm = 60;
+bpm = 30;
 difficulties {
     easy : 1;
     normal : 1.1;

@@ -1,12 +1,13 @@
+import time
 import tkinter as tk
 from PIL import Image, ImageTk
 
-from game_logic.model.command import Command
 from game_logic.game import Game
-from game_logic.model.move import Move
 from .interface import Interface
 from game_logic.model.level import Level
 import keyboard
+
+from .game_thread import GameThread
 
 
 class TkinterGui(Interface):
@@ -14,10 +15,13 @@ class TkinterGui(Interface):
     levels: list[Level] = []
     current_level: Level = None
     keyboard_listener_initiated = False
+    game_thread: GameThread | None = None
+    even_command: False
 
     def __init__(self, levels):
         super().__init__()
         self.levels = levels
+        self.even_command = False
         self.game = Game(self)
 
         self.window.title("JSD-Tim-2")
@@ -60,6 +64,9 @@ class TkinterGui(Interface):
 
         self.initiate()
 
+    def __del__(self):
+        self.game_thread.stop()
+
     def create_arrow_image_object(self, img_path, row=0, column=0):
         img = Image.open(img_path)
         img = img.resize((200, 200))
@@ -79,15 +86,19 @@ class TkinterGui(Interface):
         combination.extend(['down'] if keyboard.is_pressed('down') else [])
         combination.extend(['left'] if keyboard.is_pressed('left') else [])
         combination.extend(['right'] if keyboard.is_pressed('right') else [])
-
         if self.game and len(combination) > 0:
-            self.game.validate_move(combination)
+            self.game.actions.append(combination)
 
     def next_move(self, directions):
         self.toggle_canvas('up', directions, 0, 0)
         self.toggle_canvas('left', directions, 0, 1)
         self.toggle_canvas('right', directions, 0, 2)
         self.toggle_canvas('down', directions, 0, 3)
+        if self.even_command:
+            self.images_frame.configure(bg='green')
+        else:
+            self.images_frame.configure(bg='blue')
+        self.even_command = not self.even_command
         self.window.update()
 
     def toggle_canvas(self, toggle_name, directions, row, column):
@@ -113,14 +124,20 @@ class TkinterGui(Interface):
 
     def start_level(self, level: Level) -> None:
         self.score_label.config(text="Your score is 0")
-        self.game.restart(level)
+        if self.game_thread is not None:
+            self.game_thread.stop()
+            self.show_total_score(self.game.score)
+            self.game_thread.join()
+            time.sleep(2)
+        self.game_thread = GameThread(target=self.game.restart, args=(level,))
+        self.game_thread.start()
 
     def update_score(self, score):
         self.score_label.config(text="Your score is {}".format(score))
         self.score_label.update()
         self.window.update()
 
-    def show_total_score(self):
+    def show_total_score(self, score):
         self.score_label.config(text="Your total score is {}".format(self.game.score))
 
 

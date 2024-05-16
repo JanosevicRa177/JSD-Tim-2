@@ -1,20 +1,27 @@
+import threading
 import time
+from typing import List
 
 from game_logic.model.bonus.base_bonus import BaseBonus
 from game_logic.model.bonus.default_bonus import DefaultBonus
 
 import copy
 
+from datetime import datetime
+
 
 class Game:
     instance = None
     gui = None
 
-    bpm_speed = 0
+    bpm_speed = None
     score = 0
     bonus: BaseBonus | None = None
     current_move = None
     correct_action: bool | None = None
+    restarting = False
+
+    actions = []
 
     def __new__(cls, gui=None):
         if cls.instance is None:
@@ -24,37 +31,56 @@ class Game:
 
     def start(self, level):
         self.bpm_speed = 60 / level.bpm
+        self.restarting = False
 
         for command in level.commands:
             command.run_command()
 
-        self.gui.show_total_score()
         return
 
     def do_move(self, move):
+        if self.gui.game_thread.stopped():
+            return
+
+        self.actions = []
         self.current_move = move
         self.correct_action = None
         self.gui.next_move(move.combination)
-        time.sleep(self.bpm_speed)
+
+        t = threading.Thread(self.validate_move())
+        t.start()
+        t.join()
+
+        self.gui.update_score(self.score)
+        time.sleep(self.bpm_speed-0.5)
+
         return self.correct_action
 
     def restart(self, level):
+        self.restarting = True
         self.score = 0
         self.bonus = None
-        self.start(level)
 
-    def validate_move(self, combination):
+        self.start(level)
+        if not self.gui.game_thread.stopped():
+            self.gui.show_total_score(self.score)
+        return
+
+    def validate_move(self):
+        time.sleep(0.5)
         if self.correct_action is not None:
             return
 
-        if (self.current_move
-                and set(combination) == set(self.current_move.combination)):
-            self.correct_action = True
-        else:
-            self.correct_action = False
+        if self.actions:
+            print(self.actions[-1])
+            sorted_actions = sorted(self.actions, key=len)
+            if (self.current_move
+                    and set(sorted_actions[-1]) == set(self.current_move.combination)):
+                self.correct_action = True
+            else:
+                self.correct_action = False
 
         self.add_score()
-        self.gui.update_score(self.score)
 
     def add_score(self):
         if self.correct_action:
