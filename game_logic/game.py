@@ -1,13 +1,10 @@
 import threading
 import time
-from typing import List
 
 from game_logic.model.bonus.base_bonus import BaseBonus
 from game_logic.model.bonus.default_bonus import DefaultBonus
 
 import copy
-
-from datetime import datetime
 
 
 class Game:
@@ -54,6 +51,8 @@ class Game:
         self.gui.update_score(self.score)
         time.sleep(self.bpm_speed-0.5)
 
+        self.lower_bonus_moves()
+
         return self.correct_action
 
     def restart(self, level):
@@ -62,6 +61,7 @@ class Game:
         self.bonus = None
 
         self.start(level)
+
         if not self.gui.game_thread.stopped():
             self.gui.show_total_score(self.score)
         return
@@ -72,7 +72,6 @@ class Game:
             return
 
         if self.actions:
-            print(self.actions[-1])
             sorted_actions = sorted(self.actions, key=len)
             if (self.current_move
                     and set(sorted_actions[-1]) == set(self.current_move.combination)):
@@ -87,11 +86,11 @@ class Game:
             self.score += 1 * self.get_bonus_multiplier()
 
     def add_bonus(self, bonus_moves: int):
-        new_bonus = DefaultBonus(bonus_moves)
         if self.bonus is None:
             self.bonus = DefaultBonus(bonus_moves)
         else:
-            new_bonus.bonus = copy.copy(self.bonus)
+            new_bonus = DefaultBonus(bonus_moves)
+            new_bonus.bonus = self.bonus
             self.bonus = new_bonus
 
     def get_bonus_multiplier(self):
@@ -104,7 +103,4 @@ class Game:
         if self.bonus is not None:
             self.bonus.lower_bonus_moves()
             if self.bonus.get_bonus_moves() <= 0:
-                if self.bonus.get_inner_bonus() is not None:
-                    self.bonus = self.bonus.get_inner_bonus()
-                else:
-                    self.bonus = None
+                self.bonus = self.bonus.get_inner_bonus()

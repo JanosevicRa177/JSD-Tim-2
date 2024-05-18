@@ -35,28 +35,18 @@ Set Verse_part {
 };
 
 Start {
-    entrance;
-    left right;
+    Verse_part;
     up down;
-    left;
-    right;
-    right;
-    Verse;
     if complete {
         up;
         down;
-        up down;
-        up;
-        down;
-        up down;
-    } bonus next 20;
-    up;
-    down;
-    up;
-    left;
-    right;
-    right;
+            if complete {
+                up;
+                down;
+            } bonus next 6;
+    } bonus next 3;
     Verse;
-    left down;
-    right down;
+    Verse_part;
+    Verse_part;
+    Verse_part;
 };

@@ -14,7 +14,8 @@ class IfComplete(Command):
             move_successful = command.run_command()
             if move_successful and command.is_regular_move():
                 successful_moves += 1
-        if len(self.commands) == successful_moves:
+        filtered_commands = [command for command in self.commands if command.is_regular_move()]
+        if len(filtered_commands) == successful_moves:
             game = Game()
             game.add_bonus(self.moves_with_bonus)
         return True
