@@ -36,6 +36,7 @@ Set Verse_part {
 
 Start {
     Verse_part;
+    pause(2);
     up down;
     if complete {
         up;

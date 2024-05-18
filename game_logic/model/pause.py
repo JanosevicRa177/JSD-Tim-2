@@ -1,3 +1,4 @@
+from game_logic.game import Game
 from game_logic.model.command import Command
 
 
@@ -7,7 +8,9 @@ class Pause(Command):
         self.value = value
 
     def run_command(self):
-        return True
+        game = Game()
+        for i in range(self.value):
+            game.run_pause()
 
     def is_regular_move(self) -> bool:
         return False

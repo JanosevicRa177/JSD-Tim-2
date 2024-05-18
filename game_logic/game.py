@@ -55,6 +55,11 @@ class Game:
 
         return self.correct_action
 
+    def run_pause(self):
+        if self.gui.game_thread.stopped():
+            return
+        time.sleep(self.bpm_speed)
+
     def restart(self, level):
         self.restarting = True
         self.score = 0

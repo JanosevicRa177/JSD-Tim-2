@@ -125,12 +125,10 @@ class TkinterGui(Interface):
         self.score_label.config(text="Your score is 0")
         if self.game_thread is not None:
             self.game_thread.stop()
-            print(self.game_thread)
             self.show_total_score(self.game.score)
             self.game_thread.join()
         self.game_thread = GameThread(target=self.game.restart, args=(level,))
         self.game_thread.start()
-
 
     def update_score(self, score):
         self.score_label.config(text="Your score is {}".format(score))
