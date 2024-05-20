@@ -1,5 +1,5 @@
-Name = "some_song";
-bpm = 60;
+Name = "any_song";
+bpm = 30;
 difficulties {
     easy : 1;
     normal : 1.1;
@@ -9,15 +9,13 @@ difficulties {
 
 Start {
     right;
-    right; 
-    if complete {
-        up;
+    right;
+    repeat(4) {
+        up down;
         down;
         up down;
-        up;
-        down;
-        up down;
-    } bonus next 20;
+    };
+    if points(400) bonus next 20;
     up;
     down;
     up;

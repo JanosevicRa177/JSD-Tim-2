@@ -1,14 +1,12 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-from game_logic.command import Command
-from game_logic.end_bonus_sequence import EndBonusSequence
 from game_logic.game import Game
-from game_logic.move import Move
-from game_logic.start_bonus_sequence import StartBonusSequence
 from .interface import Interface
-from level import Level
+from game_logic.model.level import Level
 import keyboard
+
+from .game_thread import GameThread
 
 
 class TkinterGui(Interface):
@@ -16,10 +14,13 @@ class TkinterGui(Interface):
     levels: list[Level] = []
     current_level: Level = None
     keyboard_listener_initiated = False
+    game_thread: GameThread | None = None
+    even_command: False
 
     def __init__(self, levels):
         super().__init__()
         self.levels = levels
+        self.even_command = False
         self.game = Game(self)
 
         self.window.title("JSD-Tim-2")
@@ -40,7 +41,11 @@ class TkinterGui(Interface):
         self.images_frame.place(x=0, rely=0.1, relheight=0.4, relwidth=1)
 
         self.images_frame.rowconfigure(0, weight=1)
-        self.images_frame.columnconfigure((0, 1, 2, 3), weight=1)
+
+        self.images_frame.columnconfigure(0, weight=1)
+        self.images_frame.columnconfigure(1, weight=1)
+        self.images_frame.columnconfigure(2, weight=1)
+        self.images_frame.columnconfigure(3, weight=1)
 
         img_up, arrow_up, canvas_up = self.create_arrow_image_object('imgs/arrow-up.jpg', 0, 0)
         self.canvas_up = canvas_up
@@ -57,6 +62,9 @@ class TkinterGui(Interface):
         self.window.bind('<Key>', lambda e: self.key_pressed(e))
 
         self.initiate()
+
+    def __del__(self):
+        self.game_thread.stop()
 
     def create_arrow_image_object(self, img_path, row=0, column=0):
         img = Image.open(img_path)
@@ -77,15 +85,19 @@ class TkinterGui(Interface):
         combination.extend(['down'] if keyboard.is_pressed('down') else [])
         combination.extend(['left'] if keyboard.is_pressed('left') else [])
         combination.extend(['right'] if keyboard.is_pressed('right') else [])
-
         if self.game and len(combination) > 0:
-            self.game.validate_action(combination)
+            self.game.actions.append(combination)
 
     def next_move(self, directions):
         self.toggle_canvas('up', directions, 0, 0)
         self.toggle_canvas('left', directions, 0, 1)
         self.toggle_canvas('right', directions, 0, 2)
         self.toggle_canvas('down', directions, 0, 3)
+        if self.even_command:
+            self.images_frame.configure(bg='green')
+        else:
+            self.images_frame.configure(bg='blue')
+        self.even_command = not self.even_command
         self.window.update()
 
     def toggle_canvas(self, toggle_name, directions, row, column):
@@ -105,40 +117,25 @@ class TkinterGui(Interface):
         for idx, level in enumerate(self.levels):
             k = idx + 1
             btn = tk.Button(self.level_sidebar, height=2,
-                            bg="blue", fg="white", font=10, text=str(k),
+                            bg="blue", fg="white", font=10, text=str(k) + " " + level.songName,
                             command=lambda lvl=level, lvl_ind=k: self.start_level(lvl))
             btn.grid(row=idx, column=0, sticky='nsew')
 
     def start_level(self, level: Level) -> None:
-        current_moves = [
-            Move(['left', 'right', 'down']),
-            Move(['right']),
-            Move(['down']),
-            Move(['up']),
-            StartBonusSequence(1.4),
-            Move(['left']),
-            Move(['right']),
-            Move(['down']),
-            Move(['up']),
-            EndBonusSequence(1.4)
-
-        ]
-        print('Starting level again')
         self.score_label.config(text="Your score is 0")
-        self.level = level
-        self.game.restart(level, current_moves)
-
-    def process_action(self, action: Command):
-        if action.is_regular_move():
-            self.next_move(action.get_combination())
-            return
+        if self.game_thread is not None:
+            self.game_thread.stop()
+            self.show_total_score(self.game.score)
+            self.game_thread.join()
+        self.game_thread = GameThread(target=self.game.restart, args=(level,))
+        self.game_thread.start()
 
     def update_score(self, score):
         self.score_label.config(text="Your score is {}".format(score))
         self.score_label.update()
         self.window.update()
 
-    def show_total_score(self):
+    def show_total_score(self, score):
         self.score_label.config(text="Your total score is {}".format(self.game.score))
 
 

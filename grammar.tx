@@ -12,7 +12,7 @@ Difficulty:
     name=ID ':' value=FLOAT ';';
 
 Command:
-    if_=IfStatement|loop=Loop|move=Move|set=[Set]|pause=PauseCommand
+    pause=PauseCommand|if_=IfStatement|loop=Loop|move=Move|set=[Set]
 ;
 
 IfStatement:

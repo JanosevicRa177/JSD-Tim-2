@@ -1,0 +1,27 @@
+Name = "pesma_3";
+bpm = 60;
+
+difficulties {
+    easy : 1;
+    normal : 1.1;
+    hard : 1.2;
+    extreme : 1.5;
+};
+
+Set Verse_part {
+    left right;
+    left;
+    left right;
+    left;
+};
+
+Start {
+    left down;
+    right down;
+    Verse_part;
+    right;
+    repeat(4) {
+        up down;
+        down;
+    };
+};

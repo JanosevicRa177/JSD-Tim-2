@@ -1,93 +1,111 @@
-from game_logic.command import Command
-from game_logic.endmove import EndMove
-from game_logic.move import Move
-from level import Level
 import threading
+import time
 
-from collections import deque
+from game_logic.model.bonus.base_bonus import BaseBonus
+from game_logic.model.bonus.default_bonus import DefaultBonus
+
+import copy
 
 
 class Game:
-    level: Level = None
-    is_locked = False
-    should_stop = False
-    current_moves: deque[Command] = deque()
-    current_move = None
+    instance = None
+    gui = None
+
+    bpm_speed = None
     score = 0
-    multiplier = 1
-    timer = None
-    speed = 3.0
-    correct_action = -1
+    bonus: BaseBonus | None = None
+    current_move = None
+    correct_action: bool | None = None
+    restarting = False
 
-    def __init__(self, observer):
-        self.gui = observer
+    actions = []
 
-    def start(self):
-        self.timer = threading.Timer(self.speed, self.start)
-        self.timer.start()
+    def __new__(cls, gui=None):
+        if cls.instance is None:
+            cls.instance = super(Game, cls).__new__(cls)
+            cls.instance.gui = gui
+        return cls.instance
 
-        if self.should_stop:
-            self.timer.cancel()
-            self.gui.show_total_score()
+    def start(self, level):
+        self.bpm_speed = 60 / level.bpm
+        self.restarting = False
+
+        for command in level.commands:
+            command.run_command()
+
+        return
+
+    def do_move(self, move):
+        if self.gui.game_thread.stopped():
             return
 
-        self.update_parameters()
-        self.current_move = self.current_moves.popleft()
-        self.gui.process_action(self.current_move)
+        self.actions = []
+        self.current_move = move
+        self.correct_action = None
+        self.gui.next_move(move.combination)
 
-        self.correct_action = -1
+        t = threading.Thread(self.validate_move())
+        t.start()
+        t.join()
 
-        if not self.current_move.is_regular_move():
-            self.timer.cancel()
-            self.start()
-
-        if len(self.current_moves) == 0:
-            self.should_stop = True
-            self.gui.show_total_score()
-            return
-
-    def __del__(self):
-        self.should_stop = True
-
-    def restart(self, level, moves):
-        print('restarting')
-        self.level = level
-        self.current_moves = deque()
-        self.score = 0
-        self.multiplier = 1
-        self.correct_action = -1
-
-        if self.timer:
-            self.timer.cancel()
-            self.timer = threading.Timer(self.speed, self.start)
-
-        for move in moves:
-            self.current_moves.append(move)
-        self.current_moves.append(EndMove())
-        self.should_stop = False
-        self.start()
-
-    def validate_action(self, combination):
-        if self.correct_action in [0, 1]:
-            return
-
-        if (self.current_move
-                and set(combination) == set(self.current_move.get_combination())):
-            self.correct_action = 1
-        else:
-            self.correct_action = 0
-
-        self.update_score()
         self.gui.update_score(self.score)
+        time.sleep(self.bpm_speed-0.5)
 
-    def update_parameters(self):
-        if not self.current_move:
+        self.lower_bonus_moves()
+
+        return self.correct_action
+
+    def run_pause(self):
+        if self.gui.game_thread.stopped():
             return
-        self.calculate_multiplier()
-        print('New Score {}, New Multiplier {}'.format(self.score, self.multiplier))
+        time.sleep(self.bpm_speed)
 
-    def update_score(self):
-        self.score += self.correct_action * self.multiplier
+    def restart(self, level):
+        self.restarting = True
+        self.score = 0
+        self.bonus = None
 
-    def calculate_multiplier(self):
-        self.multiplier *= self.current_move.get_multiplier()
+        self.start(level)
+
+        if not self.gui.game_thread.stopped():
+            self.gui.show_total_score(self.score)
+        return
+
+    def validate_move(self):
+        time.sleep(0.5)
+        if self.correct_action is not None:
+            return
+
+        if self.actions:
+            sorted_actions = sorted(self.actions, key=len)
+            if (self.current_move
+                    and set(sorted_actions[-1]) == set(self.current_move.combination)):
+                self.correct_action = True
+            else:
+                self.correct_action = False
+
+        self.add_score()
+
+    def add_score(self):
+        if self.correct_action:
+            self.score += 1 * self.get_bonus_multiplier()
+
+    def add_bonus(self, bonus_moves: int):
+        if self.bonus is None:
+            self.bonus = DefaultBonus(bonus_moves)
+        else:
+            new_bonus = DefaultBonus(bonus_moves)
+            new_bonus.bonus = self.bonus
+            self.bonus = new_bonus
+
+    def get_bonus_multiplier(self):
+        if self.bonus is None:
+            return 1
+        else:
+            return round(self.bonus.get_bonus_multiplier(), 2)
+
+    def lower_bonus_moves(self):
+        if self.bonus is not None:
+            self.bonus.lower_bonus_moves()
+            if self.bonus.get_bonus_moves() <= 0:
+                self.bonus = self.bonus.get_inner_bonus()

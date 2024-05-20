@@ -1,6 +1,4 @@
-from typing import Any
-
-from game_logic.command import Command
+from game_logic.model.command import Command
 
 
 class Loop(Command):
@@ -9,11 +7,10 @@ class Loop(Command):
         self.times_to_repeat = times_to_repeat
         self.commands: list[Command] = []
 
-    def get_combination(self) -> list[Any]:
-        pass
-
-    def get_multiplier(self) -> float:
-        return 1
+    def run_command(self):
+        for _ in range(self.times_to_repeat):
+            for command in self.commands:
+                command.run_command()
 
     def is_regular_move(self) -> bool:
         return False
