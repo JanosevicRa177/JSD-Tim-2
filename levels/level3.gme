@@ -1,5 +1,5 @@
 Name = "Save_your_tears";
-Url = "https://www.youtube.com/watch?v=XXYlFuWEuKI";
+URL = "https://www.youtube.com/watch?v=XXYlFuWEuKI";
 bpm = 30;
 difficulties {
     easy : 1;

@@ -1,5 +1,5 @@
 Name = "Blinding_lights";
-Url = "https://www.youtube.com/watch?v=Uj3uJp6DK5k";
+URL = "https://www.youtube.com/watch?v=Uj3uJp6DK5k";
 bpm = 90;
 difficulties {
     easy : 1;
