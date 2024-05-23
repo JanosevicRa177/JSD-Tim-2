@@ -1,4 +1,5 @@
-Name = "pesma_2";
+Name = "Waiting_for_love";
+Url = "https://www.youtube.com/watch?v=cHHLHGNpCSA&list=RDcHHLHGNpCSA&start_radio=1&rv=Uj3uJp6DK5k";
 bpm = 60;
 difficulties {
     easy : 1;
@@ -60,3 +61,4 @@ Start {
     left down;
     right down;
 };
+

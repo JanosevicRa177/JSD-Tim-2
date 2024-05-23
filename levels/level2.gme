@@ -1,4 +1,5 @@
-Name = "some_song";
+Name = "Let_me_love_you";
+Url = "https://www.youtube.com/watch?v=euCqAq6BRa4";
 bpm = 30;
 difficulties {
     easy : 1;

@@ -1,11 +1,16 @@
 Program:
     'Name = ''"'-songName=ID'"'-';'
+    'Url = ''"'-songUrl=URL'"'-';'
     'bpm = ' bpm=INT';'
     'difficulties {' difficulty+=Difficulty '};'
     setDefinitions*=Set
     'Start {'
         commands+=Command
     '};'
+;
+
+URL:
+    /https?:\/\/[a-zA-Z0-9.?=]+\/[a-zA-Z0-9.?=&_]+/
 ;
 
 Difficulty:

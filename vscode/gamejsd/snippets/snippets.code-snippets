@@ -3,7 +3,8 @@
         "prefix": "gme",
         "body": [
             "Name = \"${1:ime_pesme}\";",
-            "bpm = ${2:60};",
+            "Url = \"${2:https://www.youtube.com/url}\";",
+            "bpm = ${3:60};",
             "difficulties { ",
 
             "};",
