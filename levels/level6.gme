@@ -1,6 +1,6 @@
-Name = "pesma_3";
+Name = "Wake_me_up";
+URL = "https://www.youtube.com/watch?v=IcrbM1l_BoI&list=RDcHHLHGNpCSA&index=2";
 bpm = 60;
-
 difficulties {
     easy : 1;
     normal : 1.1;

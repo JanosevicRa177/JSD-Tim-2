@@ -4,7 +4,7 @@
 	"patterns": [
 		{
 		"name": "keyword.control.gme",
-		"match": "\\b(Name|bpm|difficulties|Start|Set|if|complete|points|bonus|next|repeat)\\b"
+		"match": "\\b(Name|URL|bpm|difficulties|Start|Set|if|complete|points|bonus|next|repeat)\\b"
 		},
 		{
 			"name": "string.quoted.double",

@@ -4,3 +4,6 @@ textX[cli]
 tk
 pillow
 keyboard
+pygame
+pygame requests
+pytube pydub

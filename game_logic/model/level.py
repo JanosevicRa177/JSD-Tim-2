@@ -8,6 +8,7 @@ class Level:
         self.commands: list[Command] = []
         self.difficulties: list[Difficulty] = []
         self.songName = model.songName
+        self.songUrl = model.songUrl
         self.bpm = model.bpm
 
         for difficulty in model.difficulty:

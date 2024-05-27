@@ -9,7 +9,7 @@ entity_mm = metamodel_from_file('grammar.tx')
 def scan_level_files():
     level_files = []
     for file in os.listdir("levels"):
-        if file.endswith(".ddr"):
+        if file.endswith(".gme"):
             level_files.append(os.path.join("levels", file))
     return level_files
 
