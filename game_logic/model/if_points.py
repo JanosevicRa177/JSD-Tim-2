@@ -11,7 +11,7 @@ class IfPoints(Command):
     def run_command(self):
         game = Game()
         if game.score >= self.points:
-            game.bonus.add_bonus(self.moves_with_bonus)
+            game.add_bonus(self.moves_with_bonus)
 
     def is_regular_move(self) -> bool:
         return False

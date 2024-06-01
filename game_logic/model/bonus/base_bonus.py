@@ -8,10 +8,6 @@ class BaseBonus(ABC):
         pass
 
     @abstractmethod
-    def add_bonus(self, bonus_moves: int):
-        pass
-
-    @abstractmethod
     def lower_bonus_moves(self):
         pass
 

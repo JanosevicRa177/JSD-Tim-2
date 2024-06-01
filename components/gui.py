@@ -1,21 +1,45 @@
+import os
 import tkinter as tk
+
+import keyboard
+import pydub
+import sounddevice as sd
+import soundfile as sf
+
 from PIL import Image, ImageTk
+from pydub import AudioSegment
+from pytube import YouTube
+from pydub.playback import play
+
 
 from game_logic.game import Game
-from .interface import Interface
+from game_logic.model.difficulty import Difficulty
 from game_logic.model.level import Level
-import keyboard
-
 from .game_thread import GameThread
+from .interface import Interface
+
+
+def download_file(url, song_name):
+    yt = YouTube(url)
+    stream = yt.streams.filter(only_audio=True).first()
+    downloaded_file = stream.download()
+    file_path = os.path.join("songs", song_name + ".mp3")
+    audio = AudioSegment.from_file(downloaded_file)
+    audio.export(file_path, format="mp3")
+    os.remove(downloaded_file)
+    return file_path
 
 
 class TkinterGui(Interface):
     window = tk.Tk()
+    dialog = None
     levels: list[Level] = []
     current_level: Level = None
     keyboard_listener_initiated = False
     game_thread: GameThread | None = None
     even_command: False
+    done_loading = False
+    chosen_difficulty: Difficulty | None = None
 
     def __init__(self, levels):
         super().__init__()
@@ -122,13 +146,97 @@ class TkinterGui(Interface):
             btn.grid(row=idx, column=0, sticky='nsew')
 
     def start_level(self, level: Level) -> None:
+
         self.score_label.config(text="Your score is 0")
         if self.game_thread is not None:
             self.game_thread.stop()
             self.show_total_score(self.game.score)
             self.game_thread.join()
+
+        self.chosen_difficulty = None
+        self.open_dialog(level)
+
+        if self.chosen_difficulty is None:
+            return
         self.game_thread = GameThread(target=self.game.restart, args=(level,))
         self.game_thread.start()
+
+    def open_dialog(self, level : Level):
+        self.dialog = tk.Toplevel(self.window)
+        self.dialog.title("Choose difficulty")
+
+        self.dialog.transient(self.window)
+
+        dialog_width = 400
+        dialog_height = 400
+
+        left = tk.Frame(self.dialog, bg="white")
+        center = tk.Frame(self.dialog, bg="white")
+        right = tk.Frame(self.dialog, bg="white")
+        up = tk.Frame(center, bg="white")
+        super_center = tk.Frame(center, bg="white")
+        down = tk.Frame(center, bg="white")
+
+        left.place(x=0, y=0, width=100, relheight=1)
+        center.place(x=100, y=0, width=200, relheight=1)
+        right.place(x=300, y=0, width=100, relheight=1)
+        left.place(x=0, y=0, width=100, relheight=1)
+        up.place(x=0, y=0, relwidth=1, height=100)
+        super_center.place(x=0, y=100, relwidth=1, height=200)
+        down.place(x=0, y=300, relwidth=1, height=100)
+
+        root_width = self.window.winfo_width()
+        root_height = self.window.winfo_height()
+        root_x = self.window.winfo_x()
+        root_y = self.window.winfo_y()
+
+        position_right = int(root_x + (root_width/2) - (dialog_width/2))
+        position_down = int(root_y + (root_height/2) - (dialog_height/2))
+
+        self.dialog.geometry(f"{dialog_width}x{dialog_height}+{position_right}+{position_down}")
+
+        for idx, difficulty in enumerate(level.difficulties):
+            k = idx + 1
+            btn = tk.Button(super_center, height=3, width=7,
+                            bg="blue", fg="white", font=10, text=difficulty.name,
+                            command=lambda diff=difficulty, lvl_ind=k: start_Level(diff))
+            btn.grid(row=round(idx/3), column=idx % 2, sticky='nsew')
+
+            def start_Level(diff):
+                self.chosen_difficulty = diff
+                up.destroy()
+                down.destroy()
+                super_center.forget()
+                git_image = Image.open("imgs/loading.gif")
+                git_image = ImageTk.PhotoImage(git_image)
+                img_label = tk.Label(super_center, image=git_image, bg="white")
+                img_label.place(relx=0.5, rely=0.5, anchor='center')
+                self.dialog.update()
+
+                self.play_music(level.songUrl, level.songName)
+                self.dialog.destroy()
+
+        self.dialog.grab_set()
+
+        self.dialog.focus_set()
+
+        label = tk.Label(up, text="Choose difficulty")
+        label.pack(pady=20)
+
+        close_button = tk.Button(down, text="Close", command=self.dialog.destroy)
+        close_button.pack(pady=20)
+
+        # Wait for the dialog to close
+        self.window.wait_window(self.dialog)
+
+    def play_music(self, url, song_name):
+        file_path = download_file(url, song_name)
+        data, samplerate = sf.read(file_path)
+
+        # Adjust the playback speed
+        adjusted_samplerate = int(samplerate * self.chosen_difficulty.value)
+
+        sd.play(data, adjusted_samplerate)
 
     def update_score(self, score):
         self.score_label.config(text="Your score is {}".format(score))
