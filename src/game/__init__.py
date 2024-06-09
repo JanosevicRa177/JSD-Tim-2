@@ -2,7 +2,7 @@
 import os
 
 from components.gui import TkinterGui
-from game_logic.model.level import Level
+from src.game.game_logic.model.level import Level
 from textx import metamodel_from_file
 
 
