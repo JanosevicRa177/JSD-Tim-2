@@ -25,7 +25,11 @@ def load_levels():
     return [load_level_model(level_file) for level_file in level_files]
 
 
-if __name__ == "__main__":
+def main():
     levels = load_levels()
     gui = TkinterGui(levels)
     gui.initiate()
+
+
+if __name__ == "__main__":
+    main()
