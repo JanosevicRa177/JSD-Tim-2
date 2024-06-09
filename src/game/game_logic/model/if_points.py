@@ -1,5 +1,5 @@
-from game.game_logic.game import Game
-from game.game_logic.model.command import Command
+from game_logic.game import Game
+from game_logic.model.command import Command
 
 
 class IfPoints(Command):
