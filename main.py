@@ -6,6 +6,11 @@ from components.gui import TkinterGui
 from game_logic.model.level import Level
 import os
 
+from components import TkinterGui
+from game_logic.model.level import Level
+from textx import metamodel_from_file
+
+
 entity_mm = metamodel_from_file('grammar.tx')
 
 
@@ -28,8 +33,11 @@ def load_levels():
     return [load_level_model(level_file) for level_file in level_files]
 
 
-if __name__ == "__main__":
+def main():
     levels = load_levels()
 
     gui = TkinterGui(levels)
     gui.initiate()
+
+if __name__ == "__main__":
+    main()

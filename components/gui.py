@@ -15,6 +15,9 @@ from pydub.playback import play
 from game_logic.game import Game
 from game_logic.model.difficulty import Difficulty
 from game_logic.model.level import Level
+from .interface import Interface
+import keyboard
+
 from .game_thread import GameThread
 from .interface import Interface
 

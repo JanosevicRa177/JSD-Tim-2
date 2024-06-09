@@ -1,6 +1,11 @@
 import threading
 import time
 
+from pytube import YouTube
+from pydub import AudioSegment
+import pygame
+import os
+
 from game_logic.model.bonus.base_bonus import BaseBonus
 from game_logic.model.bonus.default_bonus import DefaultBonus
 

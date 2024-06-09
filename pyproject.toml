@@ -1,0 +1,19 @@
+[project]
+name = "Gme"
+version = "0.1.0"
+description = "College project where we implemented DSL for game level specification"
+license = {text = "MIT"}
+authors = [
+    {name = "Sara Sinjeri", email = "sara1404@gmail.com"},
+    {name = "Ana Vulin", email = "sm.vulinana@gmail.com"},
+    {name = "Dusan Janosevic", email = "JanosevicRa176@gmail.com"},
+    {name = "Srdjan Stjepanovic", email = "businessrdjan@gmail.com"}
+]
+
+[project.scripts]
+gme-run = "main:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
