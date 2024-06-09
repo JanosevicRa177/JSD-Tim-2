@@ -5,8 +5,7 @@ tk
 pillow~=10.3.0
 keyboard~=0.13.5
 pygame~=2.5.2
-pygame requests
-pytube pydub
+requests
 PyInstaller~=6.7.0
 
 pip~=24.0
