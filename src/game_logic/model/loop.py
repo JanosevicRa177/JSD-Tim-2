@@ -1,4 +1,4 @@
-from game_logic.model.command import Command
+from src.game_logic.model.command import Command
 
 
 class Loop(Command):

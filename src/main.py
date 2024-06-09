@@ -1,9 +1,9 @@
 from textx.metamodel import metamodel_from_file
-from components.gui import TkinterGui
-from game_logic.model.level import Level
+from src.components.gui import TkinterGui
+from src.game_logic.model import Level
 import os
 
-entity_mm = metamodel_from_file('grammar.tx')
+entity_mm = metamodel_from_file('../grammar.tx')
 
 
 def scan_level_files():

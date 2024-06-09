@@ -1,12 +1,9 @@
 import threading
 import time
 
-from game_logic.model.bonus.base_bonus import BaseBonus
-from game_logic.model.bonus.default_bonus import DefaultBonus
+from src.game_logic.model.bonus.base_bonus import BaseBonus
+from src.game_logic.model.bonus.default_bonus import DefaultBonus
 
-import copy
-
-import requests
 from pytube import YouTube
 from pydub import AudioSegment
 import pygame

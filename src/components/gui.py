@@ -1,9 +1,9 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-from game_logic.game import Game
+from src.game_logic.game import Game
 from .interface import Interface
-from game_logic.model.level import Level
+from src.game_logic.model.level import Level
 import keyboard
 
 from .game_thread import GameThread

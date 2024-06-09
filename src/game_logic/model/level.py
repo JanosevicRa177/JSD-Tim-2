@@ -1,6 +1,6 @@
-from game_logic.model.command import Command
-from game_logic.model.converter.converter import interpret_command
-from game_logic.model.difficulty import Difficulty
+from src.game_logic.model.command import Command
+from src.game_logic.model.converter.converter import interpret_command
+from src.game_logic.model.difficulty import Difficulty
 
 
 class Level:
