@@ -13,3 +13,7 @@ authors = [
 [project.scripts]
 gme-run = "game:main"
 
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
