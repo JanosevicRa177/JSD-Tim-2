@@ -20,6 +20,10 @@ Ana Vulin E2 62/2023
   
   [![Dance Dance revolution](https://img.youtube.com/vi/N8zdf8rbtEU/maxresdefault.jpg)](https://www.youtube.com/watch?v=N8zdf8rbtEU)
 
+  ## Run guide
+
+  To run the game you need to download the github repository and set builtin interpreter from the program, to do this easiest way is to use pycharm, go to **File** then **Settings** after that go to **Add Interpreter** and add interpreter from folder **JSD-Tim-2** needed requirements of packages can be found in **requirements.txt** file.
+
   ## DSL Specification
 
   ### Main program

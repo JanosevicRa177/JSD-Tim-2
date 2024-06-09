@@ -1,4 +1,9 @@
+import subprocess
 
+import PyInstaller
+from textx.metamodel import metamodel_from_file
+from components.gui import TkinterGui
+from game_logic.model.level import Level
 import os
 
 from components import TkinterGui
@@ -30,6 +35,7 @@ def load_levels():
 
 def main():
     levels = load_levels()
+
     gui = TkinterGui(levels)
     gui.initiate()
 

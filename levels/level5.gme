@@ -1,64 +1,110 @@
 Name = "Waiting_for_love";
 URL = "https://www.youtube.com/watch?v=cHHLHGNpCSA&list=RDcHHLHGNpCSA&start_radio=1&rv=Uj3uJp6DK5k";
-bpm = 60;
+bpm = 128;
 difficulties {
-    easy : 1;
-    normal : 1.1;
-    hard : 1.2;
-    extreme : 1.5;
+    easy: 0.8;
+    normal: 1.0;
+    hard: 1.2;
 };
 
 Set entrance {
-    left right;
     left;
     right;
+    up;
+    down;
+    left;
     right;
+    up;
+    down;
 };
 
 Set Verse {
-    Verse_part;
+    left;
+    right;
     up;
     down;
-    up;
     left;
-    Verse_part;
+    right;
     up;
     down;
-    up;
-    left;
 };
 
-Set Verse_part {
-    left right;
+Set PreChorus {
+    up;
+    up;
+    down;
+    down;
     left;
-    left right;
     left;
+    right;
+    right;
+};
+
+Set Chorus {
+    up;
+    up;
+    down;
+    down;
+    left;
+    left;
+    right;
+    right;
+    up;
+    up;
+    down;
+    down;
+    left;
+    left;
+    right;
+    right;
+};
+
+Set Bridge {
+    left;
+    right;
+    left;
+    up;
+    down;
+    right;
+    up;
+    down;
+};
+
+Set Outro {
+    repeat(4) {
+        up;
+        down;
+    };
 };
 
 Start {
     entrance;
-    left right;
-    up down;
-    left;
-    right;
-    right;
-    Verse;
+    repeat(8) {
+        Verse;
+    };
+    if points(500) bonus next 10;
+    repeat(4) {
+        PreChorus;
+    };
+    repeat(8) {
+        Chorus;
+    };
+    if points(1000) bonus next 20;
+    repeat(8) {
+        Verse;
+    };
+    repeat(4) {
+        Bridge;
+    };
+    repeat(8) {
+        Chorus;
+    };
+    if points(2000) bonus next 30;
+    repeat(8) {
+        Verse;
+    };
     if complete {
-        up;
-        down;
-        up down;
-        up;
-        down;
-        up down;
-    } bonus next 20;
-    up;
-    down;
-    up;
-    left;
-    right;
-    right;
-    Verse;
-    left down;
-    right down;
+        Outro;
+    } bonus next 40;
+    Outro;
 };
-

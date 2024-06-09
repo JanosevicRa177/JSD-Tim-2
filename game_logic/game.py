@@ -30,31 +30,14 @@ class Game:
         return cls.instance
 
     def start(self, level):
-        self.bpm_speed = 60 / level.bpm
+        self.bpm_speed = 60 / (level.bpm * self.gui.chosen_difficulty.value)
+        print(60 * self.gui.chosen_difficulty.value)
         self.restarting = False
-        self.play_music(level.songUrl, level.songName)
 
         for command in level.commands:
             command.run_command()
 
         return
-
-    def play_music(self, url, songName):
-        file_path = self.download_file(url, songName)
-        pygame.mixer.init()
-        pygame.mixer.music.load(file_path)
-        pygame.mixer.music.play(-1)  # -1 znači da se pesma ponavlja beskonačno
-
-    def download_file(self, url, songName):
-        # Skidanje videa sa yt i konverzija u mp3
-        yt = YouTube(url)
-        stream = yt.streams.filter(only_audio=True).first()
-        downloaded_file = stream.download()
-        file_path = os.path.join("songs", songName + ".mp3")
-        audio = AudioSegment.from_file(downloaded_file)
-        audio.export(file_path, format="mp3")
-        os.remove(downloaded_file)
-        return file_path
 
     def do_move(self, move):
         if self.gui.game_thread.stopped():
@@ -70,7 +53,7 @@ class Game:
         t.join()
 
         self.gui.update_score(self.score)
-        time.sleep(self.bpm_speed-0.5)
+        time.sleep(self.bpm_speed-0.35)
 
         self.lower_bonus_moves()
 
@@ -93,7 +76,7 @@ class Game:
         return
 
     def validate_move(self):
-        time.sleep(0.5)
+        time.sleep(0.35)
         if self.correct_action is not None:
             return
 
@@ -109,7 +92,7 @@ class Game:
 
     def add_score(self):
         if self.correct_action:
-            self.score += 1 * self.get_bonus_multiplier()
+            self.score += 10 * self.get_bonus_multiplier()
 
     def add_bonus(self, bonus_moves: int):
         if self.bonus is None:

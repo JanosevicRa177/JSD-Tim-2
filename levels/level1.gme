@@ -1,50 +1,104 @@
-Name = "Shape_of_you";
+Name = "Shape_of_You";
 URL = "https://www.youtube.com/watch?v=JGwWNGJdvx8";
-bpm = 60;
+bpm = 96;
 difficulties {
-    easy : 1;
-    normal : 1.1;
-    hard : 1.2;
-    extreme : 1.5;
+    easy: 0.75;
+    normal: 1.0;
+    hard: 1.25;
 };
 
 Set entrance {
-    left right;
     left;
     right;
-    right;
+    up;
+    down;
 };
 
 Set Verse {
-    Verse_part;
+    left;
+    left;
+    right;
     up;
     down;
+    down;
+    up;
+    right;
+};
+
+Set PreChorus {
+    right;
     up;
     left;
-    Verse_part;
+    down;
+    right;
     up;
+    left;
+    down;
+};
+
+Set Chorus {
+    up;
+    right;
+    down;
+    left;
+    up;
+    right;
+    down;
+    left;
+    down;
+    left;
+    up;
+    right;
+    down;
+    left;
+    up;
+    right;
+};
+
+Set Bridge {
     down;
     up;
+    right;
+    left;
+    down;
+    up;
+    right;
     left;
 };
 
-Set Verse_part {
-    left right;
-    left;
-    left right;
-    left;
+Set Outro {
+    repeat(4) {
+        left;
+        right;
+    };
 };
 
 Start {
     entrance;
-    left right;
-    pause(1);
-    up down;
-    left;
-    right;
-    right;
-    pause(5);
-    Verse;
+    repeat(6) {
+        Verse;
+    };
+    if points(300) bonus next 10;
+    repeat(4) {
+        PreChorus;
+    };
+    repeat(6) {
+        Chorus;
+    };
+    if points(800) bonus next 20;
+    repeat(4) {
+        Verse;
+    };
+    repeat(2) {
+        Bridge;
+    };
+    repeat(6) {
+        Chorus;
+    };
+    if points(1500) bonus next 30;
+    repeat(4) {
+        Verse;
+    };
     if complete {
         up;
         down;
@@ -53,13 +107,5 @@ Start {
         down;
         up down;
     } bonus next 20;
-    up;
-    down;
-    up;
-    left;
-    right;
-    right;
-    Verse;
-    left down;
-    right down;
+    Outro;
 };
