@@ -1,10 +1,13 @@
+[project]
 name = "Gme"
-license = "MIT"
+version = "0.1.0"
+description = "College project where we implemented DSL for game level specification"
+license = {text = "MIT"}
 authors = [
-    "sara1404@gmail.com",
-    "sm.vulinana@gmail.com",
-    "JanosevicRa176@gmail.com",
-    "businessrdjan@gmail.com"
+    {name = "Sara Sinjeri", email = "sara1404@gmail.com"},
+    {name = "Ana Vulin", email = "sm.vulinana@gmail.com"},
+    {name = "Dusan Janosevic", email = "JanosevicRa176@gmail.com"},
+    {name = "Srdjan Stjepanovic", email = "businessrdjan@gmail.com"}
 ]
 
 [project.scripts]
