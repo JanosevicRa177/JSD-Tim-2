@@ -1,5 +1,5 @@
-from src.game.game_logic.game import Game
-from src.game.game_logic.model.command import Command
+from game_logic.game import Game
+from game_logic.model.command import Command
 
 
 class IfComplete(Command):

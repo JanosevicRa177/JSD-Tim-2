@@ -2,11 +2,11 @@
 import os
 
 from components.gui import TkinterGui
-from src.game.game_logic.model.level import Level
+from game_logic.model.level import Level
 from textx import metamodel_from_file
 
 
-entity_mm = metamodel_from_file('../../grammar.tx')
+entity_mm = metamodel_from_file('grammar.tx')
 
 
 def scan_level_files():
@@ -33,3 +33,5 @@ def main():
     gui = TkinterGui(levels)
     gui.initiate()
 
+if __name__ == "__main__":
+    main()

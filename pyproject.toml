@@ -11,7 +11,7 @@ authors = [
 ]
 
 [project.scripts]
-gme-run = "game:main"
+gme-run = "main:main"
 
 [build-system]
 requires = ["setuptools", "wheel"]

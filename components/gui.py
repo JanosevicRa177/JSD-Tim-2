@@ -1,12 +1,12 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
+from game_logic.game import Game
+from game_logic.model.level import Level
 from .interface import Interface
 import keyboard
 
 from .game_thread import GameThread
-from .. import Level
-from ..game_logic.game import Game
 
 
 class TkinterGui(Interface):
