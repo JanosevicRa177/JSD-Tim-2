@@ -1,2 +1,12 @@
+name = "Gme"
+license = "MIT"
+authors = [
+    "sara1404@gmail.com",
+    "sm.vulinana@gmail.com",
+    "JanosevicRa176@gmail.com",
+    "businessrdjan@gmail.com"
+]
+
 [project.scripts]
-gme-run="game:main"
+gme-run = "game:main"
+
