@@ -1,2 +1,2 @@
 [project.scripts]
-gme_run="main"
+gme-run="game:main"

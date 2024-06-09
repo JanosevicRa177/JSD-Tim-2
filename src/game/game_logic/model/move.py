@@ -1,7 +1,7 @@
 import string
 
-from src.game_logic.game import Game
-from src.game_logic.model.command import Command
+from src.game.game_logic.game import Game
+from src.game.game_logic.model.command import Command
 
 
 class Move(Command):
