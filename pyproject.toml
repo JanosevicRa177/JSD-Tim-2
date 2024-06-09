@@ -1,2 +1,2 @@
-[project-scripts]
+[project.scripts]
 gme_run="main"
