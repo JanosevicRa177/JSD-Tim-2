@@ -1,10 +1,10 @@
-from src.game.game_logic.model import Command
-from src.game.game_logic.model import IfComplete
-from src.game.game_logic.model.if_points import IfPoints
-from src.game.game_logic.model import Loop
-from src.game.game_logic.model.move import Move
-from src.game.game_logic.model.pause import Pause
-from src.game.game_logic.model.set import Set
+from game.game_logic.model.command import Command
+from game.game_logic.model.if_complete import IfComplete
+from game.game_logic.model.if_points import IfPoints
+from game.game_logic.model.loop import Loop
+from game.game_logic.model.move import Move
+from game.game_logic.model.pause import Pause
+from game.game_logic.model.set import Set
 
 
 def interpret_command(command) -> Command:
