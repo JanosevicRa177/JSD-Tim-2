@@ -1,5 +1,5 @@
-from src.game.game_logic.game import Game
-from src.game.game_logic.model.command import Command
+from game.game_logic.game import Game
+from game.game_logic.model.command import Command
 
 
 class Pause(Command):

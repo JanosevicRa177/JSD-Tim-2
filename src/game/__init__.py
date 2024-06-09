@@ -3,8 +3,8 @@ import os
 
 from textx import metamodel_from_file
 
-from src.game.components.gui import TkinterGui
-from src.game.game_logic.model.level import Level
+from game.components.gui import TkinterGui
+from game.game_logic.model.level import Level
 
 entity_mm = metamodel_from_file('../../grammar.tx')
 
