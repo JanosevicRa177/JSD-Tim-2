@@ -7,7 +7,7 @@ name = "gme"
 version = "0.0.1"
 dependencies = [
     "arpeggio",
-"textX~=4.50.1",
+"textX~=4.5.1",
 "textX[cli]",
 "tk",
 "pillow~=10.3.0",
