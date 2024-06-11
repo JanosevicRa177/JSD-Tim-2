@@ -1,6 +1,6 @@
 import string
 
-from gme.game_logic.model.command import Command
+from src.gme.game_logic.model.command import Command
 
 
 class Set(Command):

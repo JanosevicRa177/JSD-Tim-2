@@ -1,9 +1,9 @@
 import os
-from gme.components import TkinterGui
-from gme.game_logic.model.level import Level
+from src.gme.components import TkinterGui
+from src.gme.game_logic.model.level import Level
 from textx import metamodel_from_file
 
-from .utils import module_path
+from src.gme.utils import module_path
 
 entity_mm = metamodel_from_file(module_path('grammar.tx'))
 

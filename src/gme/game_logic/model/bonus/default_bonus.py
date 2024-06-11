@@ -1,6 +1,6 @@
 from typing import Optional
 
-from gme.game_logic.model.bonus.base_bonus import BaseBonus
+from src.gme.game_logic.model.bonus.base_bonus import BaseBonus
 
 
 class DefaultBonus(BaseBonus):

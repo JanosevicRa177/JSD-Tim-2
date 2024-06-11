@@ -1,8 +1,8 @@
 import threading
 import time
 
-from gme.game_logic.model.bonus.base_bonus import BaseBonus
-from gme.game_logic.model.bonus.default_bonus import DefaultBonus
+from src.gme.game_logic.model.bonus.base_bonus import BaseBonus
+from src.gme.game_logic.model.bonus.default_bonus import DefaultBonus
 
 
 class Game:
