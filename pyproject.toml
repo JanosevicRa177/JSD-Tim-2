@@ -32,4 +32,4 @@ dependencies = [
 ]
 
 [project.scripts]
-gme-run="main"
+gme-run="main:main
