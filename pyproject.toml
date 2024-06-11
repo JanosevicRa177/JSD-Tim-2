@@ -31,5 +31,11 @@ dependencies = [
     'importlib-metadata; python_version<"3.10"'
 ]
 
+[tool.setuptools]
+packages = { find = { where = ["src"] } }
+
+[tool.setuptools.package-dir]
+"" = "src"
+
 [project.scripts]
-gme-run="main:main"
+gme-run="gme.main:main"

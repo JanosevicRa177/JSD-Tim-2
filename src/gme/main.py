@@ -1,17 +1,17 @@
 import os
-from src.components import TkinterGui
-from src.game_logic.model.level import Level
+from src.gme.components import TkinterGui
+from src.gme.game_logic.model.level import Level
 from textx import metamodel_from_file
 
 
-entity_mm = metamodel_from_file('src/grammar.tx')
+entity_mm = metamodel_from_file('src/gme/grammar.tx')
 
 
 def scan_level_files():
     level_files = []
-    for file in os.listdir("src/levels"):
+    for file in os.listdir("src/gme/levels"):
         if file.endswith(".gme"):
-            level_files.append(os.path.join("src/levels", file))
+            level_files.append(os.path.join("src/gme/levels", file))
     return level_files
 
 
