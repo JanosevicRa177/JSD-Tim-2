@@ -1,6 +1,6 @@
 include src/gme/grammar.tx
 recursive-include src/gme/levels *.gme
-recursive-include src/gme/songs *.mp4
+recursive-include src/gme/songs *.mp3
 recursive-include src/gme/imgs *.jpg
 recursive-include src/gme/imgs *.gif
 recursive-include src/gme/imgs *.ppm
