@@ -22,7 +22,7 @@ def download_file(url, song_name):
     yt = YouTube(url)
     stream = yt.streams.filter(only_audio=True).first()
     downloaded_file = stream.download()
-    file_path = os.path.join("songs", song_name + ".mp3")
+    file_path = os.path.join(module_path("songs"), song_name + ".mp3")
     audio = AudioSegment.from_file(downloaded_file)
     audio.export(file_path, format="mp3")
     os.remove(downloaded_file)
