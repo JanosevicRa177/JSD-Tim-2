@@ -15,6 +15,7 @@ import keyboard
 
 from .game_thread import GameThread
 from .interface import Interface
+from ..utils import module_path
 
 
 def download_file(url, song_name):
@@ -69,16 +70,16 @@ class TkinterGui(Interface):
         self.images_frame.columnconfigure(2, weight=1)
         self.images_frame.columnconfigure(3, weight=1)
 
-        img_up, arrow_up, canvas_up = self.create_arrow_image_object('gme/imgs/arrow-up.jpg', 0, 0)
+        img_up, arrow_up, canvas_up = self.create_arrow_image_object(module_path('imgs/arrow-up.jpg'), 0, 0)
         self.canvas_up = canvas_up
 
-        img_left, arrow_left, canvas_left = self.create_arrow_image_object('gme/imgs/arrow-left.jpg', 0, 1)
+        img_left, arrow_left, canvas_left = self.create_arrow_image_object(module_path('imgs/arrow-left.jpg'), 0, 1)
         self.canvas_left = canvas_left
 
-        img_right, arrow_right, canvas_right = self.create_arrow_image_object('gme/imgs/arrow-right.jpg', 0, 2)
+        img_right, arrow_right, canvas_right = self.create_arrow_image_object(module_path('imgs/arrow-right.jpg'), 0, 2)
         self.canvas_right = canvas_right
 
-        img_down, arrow_down, canvas_down = self.create_arrow_image_object('gme/imgs/arrow-down.jpg', 0, 3)
+        img_down, arrow_down, canvas_down = self.create_arrow_image_object(module_path('imgs/arrow-down.jpg'), 0, 3)
         self.canvas_down = canvas_down
 
         self.window.bind('<Key>', lambda e: self.key_pressed(e))
@@ -205,7 +206,7 @@ class TkinterGui(Interface):
                 up.destroy()
                 down.destroy()
                 super_center.forget()
-                git_image = Image.open("gme/imgs/loading.gif")
+                git_image = Image.open(module_path("imgs/loading.gif"))
                 git_image = ImageTk.PhotoImage(git_image)
                 img_label = tk.Label(super_center, image=git_image, bg="white")
                 img_label.place(relx=0.5, rely=0.5, anchor='center')
