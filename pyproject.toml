@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gme"
 version = "0.0.1"
+license = {text = "MIT License"}
+authors = ["Sara", "Ana", "Dusan", "Srdjan"]
 dependencies = [
     "arpeggio",
 "textX~=4.0.1",
@@ -34,6 +36,8 @@ dependencies = [
 [tool.setuptools]
 packages = { find = { where = ["src"] } }
 include-package-data = true
+
+
 
 [tool.setuptools.package-dir]
 "" = "src"
