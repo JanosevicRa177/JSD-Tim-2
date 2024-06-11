@@ -8,9 +8,9 @@ from PIL import Image, ImageTk
 from pydub import AudioSegment
 from pytube import YouTube
 
-from src.gme.game_logic.game import Game
-from src.gme.game_logic.model.difficulty import Difficulty
-from src.gme.game_logic.model.level import Level
+from gme.game_logic.game import Game
+from gme.game_logic.model.difficulty import Difficulty
+from gme.game_logic.model.level import Level
 import keyboard
 
 from .game_thread import GameThread

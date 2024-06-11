@@ -1,6 +1,6 @@
 import os
-from src.gme.components import TkinterGui
-from src.gme.game_logic.model.level import Level
+from gme.components import TkinterGui
+from gme.game_logic.model.level import Level
 from textx import metamodel_from_file
 
 
