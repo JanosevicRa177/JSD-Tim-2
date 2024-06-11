@@ -1,0 +1,3 @@
+include src/**/*.tx
+include src/**/*.mp4
+include src/**/*.gme
