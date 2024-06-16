@@ -24,6 +24,8 @@ Ana Vulin E2 62/2023
 
   To run the game you need to download the github repository and set builtin interpreter from the program, to do this easiest way is to use pycharm, go to **File** then **Settings** after that go to **Add Interpreter** and add interpreter from folder **JSD-Tim-2** needed requirements of packages can be found in **requirements.txt** file.
 
+  Other way to run application is to install application as package using "pip install https://github.com/JanosevicRa177/JSD-Tim-2/archive/main.zip", after that we can import and use code from the package. Game can be run with terminal command "gme-run".
+
   ## DSL Specification
 
   ### Main program
