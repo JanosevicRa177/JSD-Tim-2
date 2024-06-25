@@ -6,15 +6,20 @@ build-backend = "setuptools.build_meta"
 name = "gme"
 version = "0.0.1"
 license = {text = "MIT License"}
-authors = ["Sara", "Ana", "Dusan", "Srdjan"]
+authors = [
+    { name = "Sara" },
+    { name = "Ana" },
+    { name = "Dusan" },
+    { name = "Srdjan" }
+]
 dependencies = [
-"keyboard==0.13.5",
-"Pillow==10.3.0",
-"pydub==0.25.1",
-"pytube==15.0.0",
-"sounddevice==0.4.7",
-"soundfile==0.12.1",
-"textx==4.0.1"
+    "keyboard==0.13.5",
+    "Pillow==10.3.0",
+    "pydub==0.25.1",
+    "pytube==15.0.0",
+    "sounddevice==0.4.7",
+    "soundfile==0.12.1",
+    "textx==4.0.1"
 ]
 
 [tool.setuptools]
